@@ -14,7 +14,6 @@ Các công cụ dùng trong dự án:
 3. **Textlime**
 4. **MongoDB Combass**
 ### 2.2. Technologies
-Ng
 1. **Python 3**
 2. **Flask**
 3. **MongoDB**
