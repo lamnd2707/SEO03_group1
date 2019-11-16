@@ -49,10 +49,6 @@ def about():
 def checkout():
   return render_template('checkout.html')
 
-@app.route('/contact', methods=['GET', 'POST'])
-def login():
-  return render_template('contact.html')
-
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001)
     app.debug = True
