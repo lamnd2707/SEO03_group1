@@ -59,7 +59,7 @@ body a:focus {
 /*-- banner --*/
 
 .banner-bg {
-    background: url(../images/2.jpg)no-repeat right 80px;
+    background: url(..static/images/2.jpg)no-repeat right 80px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -544,7 +544,7 @@ ul.dropdown-menu:hover a.s-menu {
 /*-- banner-text --*/
 
 .banner-bg-agileits {
-    background: url(../images/banner.jpg) no-repeat center;
+    background: url(..static/images/banner.jpg) no-repeat center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -552,7 +552,7 @@ ul.dropdown-menu:hover a.s-menu {
 }
 
 .banner-bg-inner {
-    background: url(../images/banner.jpg) no-repeat 0 -197px;
+    background: url(..static/images/banner.jpg) no-repeat 0 -197px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -827,13 +827,13 @@ ul.about-list {
 }
 
 .inner-about1 {
-    background: url(../images/a2.jpg) no-repeat center;
+    background: url(..static/images/a2.jpg) no-repeat center;
     background-size: cover;
     min-height: 400px;
 }
 
 .about-right-grid {
-    background: url(../images/a1.jpg) no-repeat center;
+    background: url(..static/images/a1.jpg) no-repeat center;
     background-size: cover;
     min-height: 787px;
     border: 10px solid rgba(223, 164, 2, 0.35);
@@ -968,7 +968,7 @@ h4.title-about.about.text-center span {
 }
 
 .bg-right {
-    background: url(../images/s5.jpg) no-repeat center;
+    background: url(..static/images/s5.jpg) no-repeat center;
     min-height: 576px;
     background-size: cover;
 }
@@ -1499,7 +1499,7 @@ h4.title-about.about.text-center span {
 /*-- team --*/
 
 div#testimonials {
-    background: url(../images/test2.jpg) no-repeat center;
+    background: url(..static/images/test2.jpg) no-repeat center;
     background-attachment: fixed;
 }
 
