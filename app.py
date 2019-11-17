@@ -25,6 +25,30 @@ def loginmanage():
 def index():
   return render_template('index.html')
 
+@app.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+  return render_template('dashboard.html')
+
+@app.route('/tables', methods=['GET', 'POST'])
+def tables():
+  return render_template('tables.html')
+
+@app.route('/form-common', methods=['GET', 'POST'])
+def form_common():
+  return render_template('form-common.html')
+
+@app.route('/charts', methods=['GET', 'POST'])
+def charts():
+  return render_template('charts.html')
+
+@app.route('/calendar', methods=['GET', 'POST'])
+def calendar():
+  return render_template('calendar.html')
+
+@app.route('/chat', methods=['GET', 'POST'])
+def chat():
+  return render_template('chat.html')
+
 @app.route('/shop', methods=['GET', 'POST'])
 def shop():
   return render_template('shop.html')
