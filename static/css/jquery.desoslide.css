@@ -47,7 +47,7 @@
 }
 .desoslide-controls {
   display: inline-block;
-  background: url('../images/desoslide_controls.png') no-repeat 0 0;
+  background: url('../static/images/desoslide_controls.png') no-repeat 0 0;
 }
 .desoslide-controls.prev {
   width: 16px;
