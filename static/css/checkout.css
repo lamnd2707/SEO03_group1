@@ -62,7 +62,7 @@ td.invert-image a img {
 .close1,
 .close2,
 .close3 {
-	background: url('..static/images/close_1.jpg') no-repeat 0px 0px;
+	background: url('../images/close_1.jpg') no-repeat 0px 0px;
 	cursor: pointer;
 	width: 41px;
 	height: 39px;

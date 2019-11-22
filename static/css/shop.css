@@ -937,7 +937,7 @@ span.item_price {
 }
 
 .product-sec1.product-sec2 {
-	background: url(..static/images/bg1.jpg)no-repeat 0px 0px;
+	background: url(../images/bg1.jpg)no-repeat 0px 0px;
 	background-attachment: fixed;
 	background-size: cover;
 	-webkit-background-size: cover;

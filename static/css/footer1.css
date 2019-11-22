@@ -32,7 +32,7 @@
     outline: none;
     padding: 10px 0;
     width: 15%;
-    background: url(../static/images/img-sp.png) no-repeat 26px -65px #ee4f4f;
+    background: url(../images/img-sp.png) no-repeat 26px -65px #ee4f4f;
     border: none;
     -webkit-transition: .5s all;
     -moz-transition: .5s all;
@@ -41,7 +41,7 @@
 }
 
 .w3agile_newsletter_right input[type="submit"]:hover {
-    background: url(../static/images/img-sp.png) no-repeat 26px -65px #212121;
+    background: url(../images/img-sp.png) no-repeat 26px -65px #212121;
 }
 
 .footerv1-start {
@@ -119,7 +119,7 @@ ul.address li a {
 
 .w3_footerv1_grid ul.info li a {
     padding-left: 3em;
-    background: url(../static/images/img-sp.png) no-repeat -6px -98px;
+    background: url(../images/img-sp.png) no-repeat -6px -98px;
 }
 
 .w3_footerv1_grid h4 {
@@ -139,50 +139,50 @@ ul.address li a {
 }
 
 .agileits_social_button ul li a.facebook {
-    background: url(../static/images/img-sp.png) no-repeat -1px -130px #3b5998;
+    background: url(../images/img-sp.png) no-repeat -1px -130px #3b5998;
     display: block;
     width: 35px;
     height: 35px;
 }
 
 .agileits_social_button ul li a.facebook:hover {
-    background: url(../static/images/img-sp.png) no-repeat -1px -130px #34c663;
+    background: url(../images/img-sp.png) no-repeat -1px -130px #34c663;
     display: block;
 }
 
 .agileits_social_button ul li a.twitter {
-    background: url(../static/images/img-sp.png) no-repeat -41px -130px #1da1f2;
+    background: url(../images/img-sp.png) no-repeat -41px -130px #1da1f2;
     display: block;
     width: 35px;
     height: 35px;
 }
 
 .agileits_social_button ul li a.twitter:hover {
-    background: url(../static/images/img-sp.png) no-repeat -41px -130px #34c663;
+    background: url(../images/img-sp.png) no-repeat -41px -130px #34c663;
     display: block;
 }
 
 .agileits_social_button ul li a.google {
-    background: url(../static/images/img-sp.png) no-repeat -80px -130px #dd4b39;
+    background: url(../images/img-sp.png) no-repeat -80px -130px #dd4b39;
     display: block;
     width: 35px;
     height: 35px;
 }
 
 .agileits_social_button ul li a.google:hover {
-    background: url(../static/images/img-sp.png) no-repeat -80px -130px #34c663;
+    background: url(../images/img-sp.png) no-repeat -80px -130px #34c663;
     display: block;
 }
 
 .agileits_social_button ul li a.pinterest {
-    background: url(../static/images/img-sp.png) no-repeat -123px -130px #bd081c;
+    background: url(../images/img-sp.png) no-repeat -123px -130px #bd081c;
     display: block;
     width: 35px;
     height: 35px;
 }
 
 .agileits_social_button ul li a.pinterest:hover {
-    background: url(../static/images/img-sp.png) no-repeat -123px -130px #34c663;
+    background: url(../images/img-sp.png) no-repeat -123px -130px #34c663;
     display: block;
 }
 
