@@ -73,6 +73,19 @@ def about():
 def checkout():
   return render_template('checkout.html')
 
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    # col = db["book"]
+    # a = list(col.find())
+    col = db["book"]
+    # i = ''
+    a= list(col.find({}, {"_id": 0, "name": 1}))
+    sug = []
+    for i in a:
+        sug.append(i['name'])
+        # i = a
+    return render_template('Test.html', a=a, sug = sug)
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5001)
+    app.run()
     app.debug = True
