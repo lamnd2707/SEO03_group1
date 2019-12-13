@@ -29,6 +29,26 @@ def index():
 def dashboard():
   return render_template('dashboard.html')
 
+@app.route('/math', methods=['GET', 'POST'])
+def math():
+  return render_template('math.html')
+
+@app.route('/physical', methods=['GET', 'POST'])
+def physical():
+  return render_template('physical.html')
+
+@app.route('/chemistry', methods=['GET', 'POST'])
+def chemistry():
+  return render_template('chemistry.html')
+
+@app.route('/informatics', methods=['GET', 'POST'])
+def informatics():
+  return render_template('informatics.html')
+
+@app.route('/literarys', methods=['GET', 'POST'])
+def literarys():
+  return render_template('literarys.html')
+
 @app.route('/tables', methods=['GET', 'POST'])
 def tables():
   return render_template('tables.html')
