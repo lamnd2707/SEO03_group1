@@ -75,18 +75,6 @@ def subjects():
     print(subs)
     return render_template('subjects.html',subs=subs)
 
-@app.route('/charts', methods=['GET', 'POST'])
-def charts():
-  return render_template('charts.html')
-
-@app.route('/calendar', methods=['GET', 'POST'])
-def calendar():
-  return render_template('calendar.html')
-
-@app.route('/chat', methods=['GET', 'POST'])
-def chat():
-  return render_template('chat.html')
-
 @app.route('/shop', methods=['GET', 'POST'])
 def shop():
   return render_template('shop.html')
