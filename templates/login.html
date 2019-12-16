@@ -38,6 +38,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- body -->
     <link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
     <!-- //online-fonts -->
+    <style type="text/css">
+        .login {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+/* border-radius: 3px; */
+/* -webkit-user-select: none;
+  user-select: none; */
+}
+
+.login-submit {
+  /* border: 1px solid #3079ed; */
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #4d90fe;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
+}
+
+.login-submit:hover {
+  /* border: 1px solid #2f5bb7; */
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #357ae8;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+}
+
+    </style>
 </head>
 
 
@@ -207,13 +238,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <div class="panel-title">Sign In</div>
-                            <div class="fpassword">
-                                <a href="#">Forgot password?</a>
-                            </div>
                         </div>
                         <div style="padding-top:30px" class="panel-body">
                             <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                            <form id="loginform" class="form-horizontal" action="#" method="post">
+                            <form id="loginform" class="form-horizontal" action="#" method="POST">
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-user"></i>
@@ -227,18 +255,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     </span>
                                     <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required="">
                                 </div>
-                                <div class="input-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
-                                        </label>
-                                    </div>
-                                </div>
+                                {% if error %}
+                                    <p class="error"><strong>Error:</strong> {{ error }}
+                                  {% endif %}
                                 <div style="margin-top:10px" class="form-group">
                                     <!-- Button -->
                                     <div class="col-sm-12 controls">
-                                        <a id="btn-login" href="#" class="btn btn-success">Login </a>
-                                        <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
+                                        <input type="submit" name="login" class="login login-submit" value="Login">
                                     </div>
                                 </div>
                                 <div class="form-group">
