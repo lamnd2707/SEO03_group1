@@ -68,6 +68,10 @@ def tables():
 def form_common():
   return render_template('form-common.html')
 
+@app.route('/subjects', methods=['GET', 'POST'])
+def subjects():
+  return render_template('subjects.html')
+
 @app.route('/charts', methods=['GET', 'POST'])
 def charts():
   return render_template('charts.html')
@@ -118,4 +122,4 @@ def test():
     return render_template('Test.html', a=a, sug = sug)
 
 if __name__ == "__main__":
-    app.run(host ='0.0.0.0', port = 8080, debug=True)
+    app.run(debug=True)
