@@ -19,7 +19,7 @@ def loginmanage():
     	else:
     		a = list(col.find({"name":str(request.form['username']), "pass":str(request.form['pass'])}))
     		print(a)
-    		return redirect(url_for('dashboard'))
+    		return redirect(url_for('dashboard',admin=request.form['username'] ))
     return render_template('loginmanage.html', error=error)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -28,7 +28,9 @@ def index():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-  return render_template('dashboard.html')
+  if request.method == 'GET':
+    admin = request.args.get('admin')
+  return render_template('dashboard.html', admin = admin)
 
 @app.route('/math', methods=['GET', 'POST'])
 def math():
@@ -62,11 +64,15 @@ def literarys():
 
 @app.route('/tables', methods=['GET', 'POST'])
 def tables():
-  return render_template('tables.html')
+  if request.method == 'GET':
+    admin = request.args.get('admin')
+  return render_template('tables.html', admin=admin)
 
 @app.route('/form-common', methods=['GET', 'POST'])
 def form_common():
-  return render_template('form-common.html')
+  if request.method == 'GET':
+    admin = request.args.get('admin')
+  return render_template('form-common.html',admin=admin)
 
 @app.route('/subjects', methods=['GET', 'POST'])
 def subjects():
