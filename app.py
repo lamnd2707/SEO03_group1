@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, redirect, request
 from pymongo import MongoClient
+from data import find_pro
 
 app = Flask(__name__)
 myclient = MongoClient("mongodb://localhost:27017/")
@@ -31,7 +32,9 @@ def dashboard():
 
 @app.route('/math', methods=['GET', 'POST'])
 def math():
-  return render_template('math.html')
+  subs = find_pro("Book","Toan")
+  print(subs)
+  return render_template('math.html', subs = subs)
 
 @app.route('/physical', methods=['GET', 'POST'])
 def physical():
@@ -107,5 +110,4 @@ def test():
     return render_template('Test.html', a=a, sug = sug)
 
 if __name__ == "__main__":
-    app.run()
-    app.debug = True
+    app.run(host ='0.0.0.0', port = 8080, debug=True)
