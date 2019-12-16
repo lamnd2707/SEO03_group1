@@ -87,7 +87,14 @@ def shop():
 
 @app.route('/single_product', methods=['GET', 'POST'])
 def single_product():
-  return render_template('single_product.html')
+  if request.method == 'GET':
+    book = request.args.get('book')
+    print(book)
+    col = db["Book"]
+    subs = list(col.find({'name': book} ))
+    print(subs)
+
+  return render_template('single_product.html',subs=subs)
 
 @app.route('/payment', methods=['GET', 'POST'])
 def payment():
