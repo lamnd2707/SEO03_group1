@@ -1,14 +1,13 @@
 # SEO03_group1
 ## 1. Goals & Objectives
 ### 1.1. Goals
-- Có demo sớm để chuẩn bị thi cuối kỳ
-- Phát triển phần mềm để ứng dụng vào bán hàng công nghệ hiện nay
+- Manage a Library
+- Develop website to easier in nowadays
 ### 1.2. Objectives
-- Nâng cao kỹ năng làm việc nhóm cho sinh viên
-- Nâng cao kỹ năng lập trình và xây dựng phần mềm và quản lý source code trên github
+- Improve skill team work for student
+- Improve skill manage code in github and improve code skill for student
 ## 2. Tools & Technologies
 ### 2.1 Tools
-Các công cụ dùng trong dự án:
 1. **PycharmIDE**
 2. **VScode**
 3. **Textlime**
@@ -18,3 +17,5 @@ Các công cụ dùng trong dự án:
 2. **Flask**
 3. **MongoDB**
 4. **HTML/CSS**
+## 3. Setup
+-Updating.....
