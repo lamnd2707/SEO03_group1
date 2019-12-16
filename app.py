@@ -32,9 +32,9 @@ def dashboard():
 
 @app.route('/math', methods=['GET', 'POST'])
 def math():
-  subs = find_pro("Book","Toan")
-  print(subs)
-  return render_template('math.html', subs = subs)
+    subs = find_pro("Book","Toan")
+    print(subs)
+    return render_template('math.html', subs = subs)
 
 @app.route('/physical', methods=['GET', 'POST'])
 def physical():
@@ -74,6 +74,14 @@ def subjects():
     subs = list(col.find())
     print(subs)
     return render_template('subjects.html',subs=subs)
+
+@app.route('/charts', methods=['GET', 'POST'])
+def charts():
+  return render_template('charts.html')
+
+@app.route('/calendar', methods=['GET', 'POST'])
+def calendar():
+  return render_template('calendar.html')
 
 @app.route('/chat', methods=['GET', 'POST'])
 def chat():
@@ -118,9 +126,24 @@ def login():
 def about():
   return render_template('about.html')
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        query = request.form['Search']
+        col = db['Book']
+        subs = list(col.find({'name': {'$regex': query}} ))
+
+        print(subs)
+    return render_template('search.html', subs=subs)
+
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
   return render_template('checkout.html')
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+
+    return render_template('contact.html')
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
