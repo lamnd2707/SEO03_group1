@@ -70,7 +70,10 @@ def form_common():
 
 @app.route('/subjects', methods=['GET', 'POST'])
 def subjects():
-  return render_template('subjects.html')
+    col = db['Book']
+    subs = list(col.find())
+    print(subs)
+    return render_template('subjects.html',subs=subs)
 
 @app.route('/charts', methods=['GET', 'POST'])
 def charts():
@@ -101,13 +104,22 @@ def login():
   col = db['Reader']
   error = None
   if request.method == 'POST':
-    print(request.form['username'])
-    if len(list(col.find({"email":str(request.form['username']), "pass":str(request.form['password'])}))) == 0:
-        error = "Invalid user, please try again!"
-    else:
-      a = list(col.find({"email":str(request.form['username']), "pass":str(request.form['password'])}))
-      print(a)
-      return redirect(url_for('index',user = request.form['username']))
+      # print(request.form['username'])
+      try:
+          if len(list(col.find({"email": str(request.form['username']), "pass": str(request.form['password'])}))) == 0:
+              error = "Invalid user, please try again!"
+          else:
+              a = list(col.find({"email": str(request.form['username']), "pass": str(request.form['password'])}))
+              print(a)
+              return redirect(url_for('index', user=request.form['username']))
+      except:
+          email = request.form['email']
+          fname = request.form['firstname']
+          lname = request.form['lastname']
+          password = request.form['passwd']
+          col.insert({"email": email, "fname": fname, "lname": lname, "pass": password})
+          print("sucess")
+          error = "Register successful, Please login!"
   return render_template('login.html',error =error)
 
 @app.route('/about', methods=['GET', 'POST'])

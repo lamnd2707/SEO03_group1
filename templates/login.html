@@ -256,7 +256,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required="">
                                 </div>
                                 {% if error %}
-                                    <p class="error"><strong>Error:</strong> {{ error }}
+                                    <p class="error"><strong>Note:</strong> {{ error }}
                                   {% endif %}
                                 <div style="margin-top:10px" class="form-group">
                                     <!-- Button -->
@@ -287,7 +287,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </div>
                         </div>
                         <div class="panel-body">
-                            <form id="signupform" class="form-horizontal" action="#" method="post">
+                            <form id="signupform" class="form-horizontal" action="{{url_for('login')}}" method="POST">
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
                                     <span></span>
@@ -319,16 +319,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <div class="form-group">
                                     <!-- Button -->
                                     <div class="signup-btn">
-                                        <button id="btn-signup" type="button" class="btn btn-info">
-                                            <i class="icon-hand-right"></i> &nbsp; Sign Up</button>
+                                        <input type="submit" name="login" class="login login-submit" value="Sign up">
                                     </div>
                                 </div>
                                 <div style="border-top: 1px solid #999; padding-top:20px" class="form-group">
 
-                                    <div class="f-btn">
-                                        <button id="btn-fbsignup" type="button" class="btn btn-primary">
-                                            <i class="icon-facebook"></i>   Sign Up with Facebook</button>
-                                    </div>
+
                                 </div>
                             </form>
                         </div>
