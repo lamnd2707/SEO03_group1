@@ -102,13 +102,13 @@ def login():
   error = None
   if request.method == 'POST':
     print(request.form['username'])
-    if len(list(col.find({"name":str(request.form['username']), "pass":str(request.form['password'])}))) == 0:
+    if len(list(col.find({"email":str(request.form['username']), "pass":str(request.form['password'])}))) == 0:
         error = "Invalid user, please try again!"
     else:
-      a = list(col.find({"name":str(request.form['username']), "pass":str(request.form['password'])}))
+      a = list(col.find({"email":str(request.form['username']), "pass":str(request.form['password'])}))
       print(a)
-      return redirect(url_for('dashboard'),user = request.form['username'])
-  return render_template('login.html')
+      return redirect(url_for('index',user = request.form['username']))
+  return render_template('login.html',error =error)
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():
