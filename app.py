@@ -38,19 +38,27 @@ def math():
 
 @app.route('/physical', methods=['GET', 'POST'])
 def physical():
-  return render_template('physical.html')
+    subs = find_pro("Book", "Ly")
+    print(subs)
+    return render_template('physical.html', subs = subs)
 
 @app.route('/chemistry', methods=['GET', 'POST'])
 def chemistry():
-  return render_template('chemistry.html')
+    subs = find_pro("Book", "Hoa")
+    print(subs)
+    return render_template('chemistry.html',subs = subs)
 
 @app.route('/informatics', methods=['GET', 'POST'])
 def informatics():
-  return render_template('informatics.html')
+    subs = find_pro("Book", "Tin")
+    print(subs)
+    return render_template('informatics.html', subs = subs)
 
 @app.route('/literarys', methods=['GET', 'POST'])
 def literarys():
-  return render_template('literarys.html')
+    subs = find_pro("Book", "Van")
+    print(subs)
+    return render_template('literarys.html',subs = subs)
 
 @app.route('/tables', methods=['GET', 'POST'])
 def tables():

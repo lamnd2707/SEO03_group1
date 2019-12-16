@@ -7,6 +7,6 @@ def find_pro(col, sub):
 	print("success")
 	cols = db["Book"]
 	print("success")
-	res = list(cols.find({"mon":"Toan"}))
+	res = list(cols.find({"mon":sub}))
 	print(res, "success")
 	return res
