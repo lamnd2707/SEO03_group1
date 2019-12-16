@@ -184,6 +184,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
         <!--//breadcrumbs ends here-->
         <!-- Single -->
+        <h2>Result for searching: {{query}}</h2>
         <div class="section singlep_btm">
             <div class="container">
                 <div class="new_arrivals">
@@ -192,7 +193,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="col-md-3 product-men">
                         <div class="product-chr-info chr">
                             <div class="thumbnail">
-                                <a href="single_product">
+                                <a href="single_product?book={{x['name']}}">
                                     <img src={{x["link"]}} alt="">
                                 </a>
                             </div>

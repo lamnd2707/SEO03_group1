@@ -131,11 +131,15 @@ def about():
 def search():
     if request.method == 'POST':
         query = request.form['Search']
+        query1 = query.lower()
         col = db['Book']
-        subs = list(col.find({'name': {'$regex': query}} ))
-
+        subs = list(col.find({'name': {'$regex': query1}} ))
+        query2 = query1.capitalize()
+        subs1 = list(col.find({'name': {'$regex': query2}} ))
+        for i in subs1:
+          subs.append(i)
         print(subs)
-    return render_template('search.html', subs=subs)
+    return render_template('search.html', subs=subs, query=query)
 
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
