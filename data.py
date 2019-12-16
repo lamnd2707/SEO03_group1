@@ -1,10 +1,12 @@
 from pymongo import MongoClient
 
-myclient = MongoClient("mongodb://10.14.0.152:27017/")
-
+myclients = MongoClient("mongodb://localhost:27017/")
+db= myclients["Website"]
 def find_pro(col, sub):
-	db = myclient[str(col)]
+	# myclient = MongoClient("mongodb://10.14.0.152:27017/")
 	print("success")
-	res = list(db.find("mon":sub))
+	cols = db["Book"]
+	print("success")
+	res = list(cols.find({"mon":"Toan"}))
 	print(res, "success")
 	return res
