@@ -88,10 +88,10 @@ def shop():
 @app.route('/single_product', methods=['GET', 'POST'])
 def single_product():
   if request.method == 'GET':
-    book = request.args.get('book')
+    book = str(request.args.get('book')).strip()
     print(book)
     col = db["Book"]
-    subs = list(col.find({'name': book} ))
+    subs = list(col.find({'name': {'$regex':str(book)}} ))
     print(subs)
 
   return render_template('single_product.html',subs=subs)
