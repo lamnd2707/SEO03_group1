@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, redirect, request
 from pymongo import MongoClient
-from data import find_pro
+from data import find_pro, count, subs_find
 
 app = Flask(__name__)
 myclient = MongoClient("mongodb://localhost:27017/")
@@ -30,7 +30,10 @@ def index():
 def dashboard():
   if request.method == 'GET':
     admin = request.args.get('admin')
-  return render_template('dashboard.html', admin = admin)
+  count1 = count("Reader")
+  count2 = count("Book")
+  count3 = count("Admin")
+  return render_template('dashboard.html', admin = admin, count1= count1, count2=count2,count3=count3)
 
 @app.route('/math', methods=['GET', 'POST'])
 def math():
@@ -76,9 +79,8 @@ def form_common():
 
 @app.route('/subjects', methods=['GET', 'POST'])
 def subjects():
-    col = db['Book']
-    subs = list(col.find())
-    print(subs)
+    subs = subs_find("Book")
+    # print(subs)
     return render_template('subjects.html',subs=subs)
 
 @app.route('/shop', methods=['GET', 'POST'])
