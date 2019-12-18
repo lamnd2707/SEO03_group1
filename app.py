@@ -85,7 +85,8 @@ def subjects():
 
 @app.route('/shop', methods=['GET', 'POST'])
 def shop():
-  return render_template('shop.html')
+  subs = subs_find("Book")
+  return render_template('shop.html',subs = subs)
 
 @app.route('/single_product', methods=['GET', 'POST'])
 def single_product():
