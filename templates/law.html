@@ -79,7 +79,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </li>
 
                             <li class="dropdown">
-                                <a href="subjects" class="dropdown-toggle effect-3">Subjects
+                                <a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">Subjects
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -175,10 +175,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </a>
                         </li>
                         <li class="btn btn2">
-                            <a href="subjects">Subjects</a>
+                            <a href="subjects">Home</a>
                         </li>
                         <li class="btn btn3">
-                            <a href="math">Maths</a>
+                            <a href="math">Law Library</a>
                         </li>
                     </ul>
                 </div>
@@ -190,68 +190,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="container">
                 <div class="new_arrivals">
                     <!-- row3 -->
-                    {% for x in subs %}
-                    <div class="col-md-3 product-men">
-                        <div class="product-chr-info chr">
-                            <div class="thumbnail">
-                                <a href="single_product?book={{x['name']}}" >
-                                    <img src="{{x['link']}}" alt="">
-                                </a>
-                            </div>
-                            <div class="caption">
-                                <h4>{{x["name"]}}</h4>
-                                <p >{{x["tacgia"]}}</p>
-                                <div class="matrlf-mid">
-                                    <ul class="rating">
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-star yellow-star" aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-star yellow-star" aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-star yellow-star" aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-star gray-star" aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-star gray-star" aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <ul class="price-list">
-                                        <li>{{x["gia"]}} VND</li>
-                                        <li>
-                                            {{x["gia"]}} VND
-                                        </li>
-                                    </ul>
-
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="chr_item" value="Book1">
-                                    <input type="hidden" name="amount" value="180.00">
-                                    <button type="submit" class="chr-cart pchr-cart">Add to cart
-                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                    </button>
-                                    <a href="#" data-toggle="modal" data-target="#myModal1"></a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    {%endfor%}
+                    <center><h2>LAW LIBRARY</h2></center><br>
+                   <ol style="1">
+                        <li>Đối tượng được mượn sách về nhà bao gồm: Sinh viên, học viên cao học, giảng viên, CBVC trong hệ thống ĐHQGHN đã đăng ký tài khoản và được Thư viện LTT cấp quyền sử dụng.</li>
+                        <br>
+                        <li>Bạn đọc sử dụng tài khoản đăng kí và đã được Thư viện LTT cấp quyền sử dụng để làm thủ tục mượn và trả sách về nhà . Nghiêm cấm sử dụng tài khoản của người khác để mượn sách, hoặc cho người khác mượn tài khoản.</li>
+                        <br>
+                       <li>Bạn đọc được mượn tối đa là 04 tên/<b>04 cuốn</b> cho mỗi lần mượn. Thời gian mượn tùy theo thời hạn có trên website. Quá thời hạn mượn theo Quy định, bạn đọc phải nộp tiền phạt 1000đ/1cuốn/ngày (trừ ngày nghỉ Lễ, Tết).</li>
+                        <br>
+                        <li>Bạn đọc cần kiểm tra kỹ tình trạng của sách và báo lại cho thủ thư trước khi mang sách ra khỏi phòng mượn. Nếu thấy sách có dấu hiệu bị rách, mất trang, mất mã vạch, bị ghi chép,…mà không báo thì vẫn bị phạt theo Quy định của Thư viện.</li>
+                        <br>
+                        <li>Đề nghị bạn đọc mượn sách về nhà giữ gìn cẩn thận. Trường hợp vi phạm: làm rách, làm ướt, mất trang, mất mã vạch, ghi chép lên sách,…bị xử phạt theo Quy định của Thư viện (nộp phạt chi phí phục hồi, tái tạo hoặc đền lại sách mới).</li>
+                        <br>
+                        <li>Trường hợp đánh mất sách, bạn đọc phải mua đền lại sách bị mất hoặc đền bù theo giá quy định sau:<br><br>
+                                    - Đền gấp 3 lần giá sách ghi ở bìa sau.<br><br>
+                                    - Nếu sách không ghi giá tiền, sách photo <b>(250đ/trang + chi phí đóng bìa) x 3</b>
+                        </li>
+                        <br>
+                       <li>Nếu bạn đọc mượn sách quá hạn từ 10 ngày trở lên, Thư viện sẽ gửi thông báo cho bạn đọc qua email <b><u>LTT@gmail.com.</u></b> </li>
+                        <br>
+                        <li>Thời gian mượn trả sách: tất cả các ngày trong tuần từ thứ hai đến thứ Bảy <b>(trừ  ngày Chủ nhật và những ngày nghỉ Lễ)</b>.</li>
+                    </ol>
                     <!-- //row3 -->
                     <div class="clearfix"></div>
                 </div>
@@ -488,7 +447,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 containerID: 'toTop', // fading element id
                 containerHoverID: 'toTopHover', // fading element hover id
                 scrollSpeed: 1200,
-                easingType: 'linear' 
+                easingType: 'linear'
                 };
             */
 
