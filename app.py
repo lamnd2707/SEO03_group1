@@ -339,7 +339,7 @@ def contact():
             flname = ""
             user = None
         if user == "None" or user is None:
-            return render_template('contact.html', subs=subs, user="None")
+            return render_template('contact.html', user="None")
         else:
             return render_template('contact.html',user=user,flname=flname)
 
