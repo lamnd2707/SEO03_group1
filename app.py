@@ -30,10 +30,14 @@ def index():
 def dashboard():
   if request.method == 'GET':
     admin = request.args.get('admin')
-  count1 = count("Reader")
-  count2 = count("Book")
-  count3 = count("Admin")
-  return render_template('dashboard.html', admin = admin, count1= count1, count2=count2,count3=count3)
+    count1 = count("Reader")
+    count2 = count("Book")
+    count3 = count("Admin")
+    col = db["Admin"]
+    if (admin is None) or (admin =="None") or (len(list(col.find({"name":str(admin)}))) == 0):
+      return render_template('loginmanage.html', error="Please Login")
+    else:
+      return render_template('dashboard.html', admin = admin, count1= count1, count2=count2,count3=count3)
 
 @app.route('/math', methods=['GET', 'POST'])
 def math():
@@ -69,13 +73,22 @@ def literarys():
 def tables():
   if request.method == 'GET':
     admin = request.args.get('admin')
-  return render_template('tables.html', admin=admin)
+    prod = subs_find("Book")
+    col = db["Admin"]
+    if (admin is None) or (admin =="None") or (len(list(col.find({"name":str(admin)}))) == 0):
+      return render_template('loginmanage.html', error="Please Login")
+    else:
+      return render_template('tables.html', admin=admin, prod=prod)
 
 @app.route('/form-common', methods=['GET', 'POST'])
 def form_common():
   if request.method == 'GET':
     admin = request.args.get('admin')
-  return render_template('form-common.html',admin=admin)
+    col = db["Admin"]
+    if (admin is None) or (admin =="None") or (len(list(col.find({"name":str(admin)}))) == 0):
+      return render_template('loginmanage.html', error="Please Login")
+    else:
+      return render_template('form-common.html',admin=admin)
 
 @app.route('/subjects', methods=['GET', 'POST'])
 def subjects():
@@ -152,19 +165,6 @@ def checkout():
 def contact():
 
     return render_template('contact.html')
-
-@app.route('/test', methods=['GET', 'POST'])
-def test():
-    # col = db["book"]
-    # a = list(col.find())
-    col = db["book"]
-    # i = ''
-    a= list(col.find({}, {"_id": 0, "name": 1}))
-    sug = []
-    for i in a:
-        sug.append(i['name'])
-        # i = a
-    return render_template('Test.html', a=a, sug = sug)
 
 if __name__ == "__main__":
     app.run(debug=True)
