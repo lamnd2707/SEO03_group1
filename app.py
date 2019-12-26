@@ -83,12 +83,13 @@ def tables():
 @app.route('/form-common', methods=['GET', 'POST'])
 def form_common():
   if request.method == 'GET':
+    alert = ""
     admin = request.args.get('admin')
     col = db["Admin"]
     if (admin is None) or (admin =="None") or (len(list(col.find({"name":str(admin)}))) == 0):
       return render_template('loginmanage.html', error="Please Login")
     else:
-      return render_template('form-common.html',admin=admin)
+      return render_template('form-common.html',admin=admin,alert=alert)
 
 @app.route('/form-common?admin=<admin>', methods=['GET', 'POST'])
 def after_add(admin):
@@ -96,8 +97,17 @@ def after_add(admin):
     mon = request.form['select_subs']
     name = request.form['name']
     nxb = request.form['nxb']
-    
-    return render_template('form-common.html',admin=admin)
+    tacgia = request.form['tacgia']
+    language = request.form['language']
+    link = request.form['link']
+    gia = request.form['gia']
+    giagiam = request.form['giagiam']
+    description = request.form['description']
+    thoihan = request.form['thoihan']
+    col = db["Book"]
+    col.insert({"mon": mon, "name": name, "tacgia": tacgia, "gia": gia, "nxb": nxb, "giagiam" : giagiam, "language":language, "link":link, "thoihan":thoihan,"description":description})
+    alert = "abcdsdsd"
+    return render_template('form-common.html',admin=admin,alert=alert)
 
 @app.route('/subjects', methods=['GET', 'POST'])
 def subjects():
