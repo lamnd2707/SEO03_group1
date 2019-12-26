@@ -180,6 +180,10 @@ def search():
 def checkout():
   return render_template('checkout.html')
 
+@app.route('/law', methods=['GET', 'POST'])
+def law():
+  return render_template('law.html')
+
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
 
