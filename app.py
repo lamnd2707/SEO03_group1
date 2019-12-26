@@ -90,6 +90,15 @@ def form_common():
     else:
       return render_template('form-common.html',admin=admin)
 
+@app.route('/form-common?admin=<admin>', methods=['GET', 'POST'])
+def after_add(admin):
+  if request.method == 'POST':
+    mon = request.form['select_subs']
+    name = request.form['name']
+    nxb = request.form['nxb']
+    
+    return render_template('form-common.html',admin=admin)
+
 @app.route('/subjects', methods=['GET', 'POST'])
 def subjects():
     subs = subs_find("Book")
