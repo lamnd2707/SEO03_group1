@@ -57,7 +57,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <span class="icon-bar"></span>
                         </button>
                         <h1>
-                            <a class="navbar-brand" href="/">LTT</a>
+                            <a class="navbar-brand" href="/?user={{user}}">LTT</a>
                         </h1>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -68,42 +68,56 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <a class="page-scroll" href="#page-top"></a>
                             </li>
                             <li>
-                                <a href="/">Home</a>
+                                <a href="/?user={{user}}">Home</a>
                             </li>
-                            <li>
-                                <a href="about">about us</a>
+                            <li class="active">
+                                <a href="about?user={{user}}">about us</a>
                             </li>
 
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">footers
+                                <a href="subjects?user={{user}}" class="dropdown-toggle effect-3">Subjects
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="footer">Default</a>
+                                        <a href="math?user={{user}}">Math</a>
                                     </li>
                                     <li>
-                                        <a href="footer1">variant1</a>
+                                        <a href="physical?user={{user}}">Physical</a>
                                     </li>
                                     <li>
-                                        <a href="footer2">variant2</a>
+                                        <a href="chemistry?user={{user}}">Chemistry</a>
                                     </li>
                                     <li>
-                                        <a href="footer3">variant3</a>
+                                        <a href="informatics?user={{user}}">Informatics</a>
                                     </li>
                                     <li>
-                                        <a href="footer4">variant4</a>
+                                        <a href="literarys?user={{user}}">Literary</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="contact">Contact us</a>
+                                <a href="contact?user={{user}}">Contact us</a>
                             </li>
+
+                            {%if user == "None" or user == None%}
                             <li>
                                 <a href="login" title="SignIn & SignUp">
                                     <span class="fa fa-user nav-icon" aria-hidden="true"></span>
                                 </a>
                             </li>
+                            {%else%}
+                            <li class="dropdown">
+                                <a href="#" >
+                                    {{flname}}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/">Log out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {%endif%}
 
                         </ul>
                         <!-- search-bar -->
@@ -119,7 +133,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <!-- cd-header-buttons -->
                             </div>
                             <div id="cd-search" class="cd-search">
-                                <form action="#" method="post">
+                                <form action="{{url_for('search')}}" method="POST">
                                     <input name="Search" type="search" placeholder="Type and Hit Enter...">
                                 </form>
                             </div>
@@ -128,13 +142,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <!-- shopping cart -->
                         <div class="cart-mainf">
                             <div class="chrcart chrcart2 cart cart box_1">
-                                <form action="#" method="post" class="last">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="display" value="1">
-                                    <button class="top_chr_cart" type="submit" name="submit" value="">
-                                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    </button>
-                                </form>
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span></span><span></span>
+                                <a href="checkout?user={{user}}"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <!-- //shopping cart ends here -->
@@ -283,140 +292,140 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!-- //contact -->
    <!-- footer -->
    <div class="footer-bottom section">
-    <div class="container">
-        <!-- newsletter -->
-        <div class="subscribe-main section-LTT text-center">
-            <h4 class="rad-txt">
-                <span class="abtxt1">keep yourself</span>
-                <span class="abtext">updated</span>
-            </h4>
-            <h5>subscribe to our newsletter to stay up-to-date with our projects.</h5>
-            <div class="subscribe-form">
-                <form action="#" method="post" class="subscribe_form">
-                    <div class="email-news">
-                        <input type="email" placeholder="Email" required="">
+            <div class="container">
+                <!-- newsletter -->
+                <div class="subscribe-main section-LTT text-center">
+                    <h4 class="rad-txt">
+                        <span class="abtxt1">keep yourself</span>
+                        <span class="abtext">updated</span>
+                    </h4>
+                    <h5>subscribe to our newsletter to stay up-to-date with our projects.</h5>
+                    <div class="subscribe-form">
+                        <form action="#" method="post" class="subscribe_form">
+                            <div class="email-news">
+                                <input type="email" placeholder="Email" required="">
+                            </div>
+                            <div class="sub-news">
+                                <input type="submit" value="subscribe">
+                            </div>
+                        </form>
+                        <div class="clearfix"> </div>
                     </div>
-                    <div class="sub-news">
-                        <input type="submit" value="subscribe">
+                    <p>We respect your privacy.No spam ever!</p>
+                </div>
+                <!-- //newsletter ends here -->
+                <!-- footer grids-->
+                <div class="footer-cpy">
+                    <!-- footer-grid1 -->
+                    <div class="col-md-3 col-sm-6 footer-logo">
+                        <h3>
+                            <a href="/?user={{user}}">LTT</a>
+                        </h3>
+                        <h4>about us</h4>
+                        <p>Vallis Molestie Arcu Morbi Dapibus Suscipit Ante Sit Efficitur Eu estie Arcu Mor Anestie Ate Vesti.</p>
                     </div>
-                </form>
-                <div class="clearfix"> </div>
-            </div>
-            <p>We respect your privacy.No spam ever!</p>
-        </div>
-        <!-- //newsletter ends here -->
-        <!-- footer grids-->
-        <div class="footer-cpy">
-            <!-- footer-grid1 -->
-            <div class="col-md-3 col-sm-6 footer-logo">
-                <h3>
-                    <a href="/">LTT</a>
-                </h3>
-                <h4>about us</h4>
-                <p>Vallis Molestie Arcu Morbi Dapibus Suscipit Ante Sit Efficitur Eu estie Arcu Mor Anestie Ate Vesti.</p>
-            </div>
-            <!-- //footer-grid1 -->
-            <!-- footer-grid2 -->
-            <div class="col-md-3 col-sm-6 footer-nav text-center">
-                <h4>navigation</h4>
-                <ul>
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="about">About us</a>
-                    </li>
-                    <li>
-                        <a href="shop">shop</a>
-                    </li>
-                    <li>
-                        <a href="contact">contact us</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- //footer-grid2 -->
-            <!-- footer-grid3 -->
-            <div class="col-md-3 col-sm-6 blog-footer">
-                <h4>latest from blog</h4>
-                <div class="blog1">
-                    <div class="col-md-3 col-sm-3 col-xs-2 bl1">
-                        <a href="#">
-                            <img src="static/images/b1.jpg" alt="" class="img+responsive" />
-                        </a>
+                    <!-- //footer-grid1 -->
+                    <!-- footer-grid2 -->
+                    <div class="col-md-3 col-sm-6 footer-nav text-center">
+                        <h4>navigation</h4>
+                        <ul>
+                            <li>
+                                <a href="/?user={{user}}">Home</a>
+                            </li>
+                            <li>
+                                <a href="about?user={{user}}">About us</a>
+                            </li>
+                            <li>
+                                <a href="subjects?user={{user}}">Subjects</a>
+                            </li>
+                            <li>
+                                <a href="contact?user={{user}}">contact us</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="col-md-9 col-sm-9 col-xs-10 bl2">
-                        <a href="#">Dapibus Suscipit Ante Sit by instagram</a>
-                        <p>February 15, 2020</p>
+                    <!-- //footer-grid2 -->
+                    <!-- footer-grid3 -->
+                    <div class="col-md-3 col-sm-6 blog-footer">
+                        <h4>latest from blog</h4>
+                        <div class="blog1">
+                            <div class="col-md-3 col-sm-3 col-xs-2 bl1">
+                                <a href="#">
+                                    <img src="static/images/b1.jpg" alt="" class="img+responsive" />
+                                </a>
+                            </div>
+                            <div class="col-md-9 col-sm-9 col-xs-10 bl2">
+                                <a href="#">Dapibus Suscipit Ante Sit by instagram</a>
+                                <p>February 15, 2020</p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="blog1">
+                            <div class="col-md-3 col-sm-3 col-xs-2 bl1">
+                                <a href="#">
+                                    <img src="static/images/b2.jpg" alt="" class="img+responsive" />
+                                </a>
+                            </div>
+                            <div class="col-md-9 col-sm-9 col-xs-10 bl2">
+                                <a href="#">Dapibus Suscipit Ante Sit by instagram</a>
+                                <p>February 20, 2020</p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
+                    <!-- //footer-grid3 -->
+                    <!-- footer-grid4 -->
+                    <div class="col-md-3 col-sm-6 contact-foot text-right">
+                        <h4>contact us</h4>
+                       <ul>
+                            <li>
+                                <span class="fa fa-home"></span>
+                                334 Nguyen Trai
+                                <br> Thanh Xuan, HN.
+                            </li>
+                            <li>
+                                <span class="fa fa-phone"></span>
+                                0346899918
+                            </li>
+                            <li>
+                                <span class="fa fa-envelope"></span>
+                                <a href="mailto:info@example.com">LTT@gmail.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- //footer-grid4 -->
                     <div class="clearfix"></div>
                 </div>
-                <div class="blog1">
-                    <div class="col-md-3 col-sm-3 col-xs-2 bl1">
-                        <a href="#">
-                            <img src="static/images/b2.jpg" alt="" class="img+responsive" />
-                        </a>
-                    </div>
-                    <div class="col-md-9 col-sm-9 col-xs-10 bl2">
-                        <a href="#">Dapibus Suscipit Ante Sit by instagram</a>
-                        <p>February 20, 2020</p>
-                    </div>
-                    <div class="clearfix"></div>
+                <!-- //footer-grids -->
+                <!-- footer social -->
+                <div class="footer-social text-center">
+                    <h4>stay connected</h4>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <span class="fa fa-facebook icon_facebook"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa fa-twitter icon_twitter"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa fa-dribbble icon_dribbble"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa fa-google-plus icon_g_plus"></span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+                <!-- //footer social -->
             </div>
-            <!-- //footer-grid3 -->
-            <!-- footer-grid4 -->
-            <div class="col-md-3 col-sm-6 contact-foot text-right">
-                <h4>contact us</h4>
-                <ul>
-                    <li>
-                        <span class="fa fa-home"></span>
-                        1185 Burlington
-                        <br> Canada.
-                    </li>
-                    <li>
-                        <span class="fa fa-phone"></span>
-                        +12 345 678
-                    </li>
-                    <li>
-                        <span class="fa fa-envelope"></span>
-                        <a href="mailto:info@example.com">LTT@gmail.com</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- //footer-grid4 -->
-            <div class="clearfix"></div>
+            <!-- //footer container -->
         </div>
-        <!-- //footer-grids -->
-        <!-- footer social -->
-        <div class="footer-social text-center">
-            <h4>stay connected</h4>
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="fa fa-facebook icon_facebook"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="fa fa-twitter icon_twitter"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="fa fa-dribbble icon_dribbble"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="fa fa-google-plus icon_g_plus"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <!-- //footer social -->
-    </div>
-    <!-- //footer container -->
-</div>
 <!-- //footer -->
 <div class="cpy-right">
     <p>© 2020 LTT. All rights reserved | Design by

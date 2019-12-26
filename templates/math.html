@@ -61,7 +61,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <span class="icon-bar"></span>
                         </button>
                         <h1>
-                            <a class="navbar-brand" href="/">LTT</a>
+                            <a class="navbar-brand" href="/?user={{user}}">LTT</a>
                         </h1>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -72,42 +72,55 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <a class="page-scroll" href="#page-top"></a>
                             </li>
                             <li>
-                                <a href="/">Home</a>
+                                <a href="/?user={{user}}">Home</a>
                             </li>
                             <li class="active">
-                                <a href="about">about us</a>
+                                <a href="about?user={{user}}">about us</a>
                             </li>
 
                             <li class="dropdown">
-                                <a href="subjects" class="dropdown-toggle effect-3">Subjects
+                                <a href="subjects?user={{user}}" class="dropdown-toggle effect-3">Subjects
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="math">Math</a>
+                                        <a href="math?user={{user}}">Math</a>
                                     </li>
                                     <li>
-                                        <a href="physical">Physical</a>
+                                        <a href="physical?user={{user}}">Physical</a>
                                     </li>
                                     <li>
-                                        <a href="chemistry">Chemistry</a>
+                                        <a href="chemistry?user={{user}}">Chemistry</a>
                                     </li>
                                     <li>
-                                        <a href="informatics">Informatics</a>
+                                        <a href="informatics?user={{user}}">Informatics</a>
                                     </li>
                                     <li>
-                                        <a href="literarys">Literary</a>
+                                        <a href="literarys?user={{user}}">Literary</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="contact">Contact us</a>
+                                <a href="contact?user={{user}}">Contact us</a>
                             </li>
+                            {%if user == "None" or user == None%}
                             <li>
                                 <a href="login" title="SignIn & SignUp">
                                     <span class="fa fa-user nav-icon" aria-hidden="true"></span>
                                 </a>
                             </li>
+                            {%else%}
+                            <li class="dropdown">
+                                <a href="#" >
+                                    {{flname}}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/">Log out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {%endif%}
 
                         </ul>
                         <!-- search-bar -->
@@ -132,13 +145,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <!-- shopping cart -->
                         <div class="cart-mainf">
                             <div class="chrcart chrcart2 cart cart box_1">
-                                <form action="#" method="post" class="last">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="display" value="1">
-                                    <button class="top_chr_cart" type="submit" name="submit" value="">
-                                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    </button>
-                                </form>
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span></span><span></span>
+                                <a href="checkout?user={{user}}"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <!-- //shopping cart ends here -->
@@ -170,15 +178,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="row">
                     <ul class="btn-group btn-breadcrumb bc-list">
                         <li class="btn btn1">
-                            <a href="/">
+                            <a href="/?user={{user}}">
                                 <i class="glyphicon glyphicon-home"></i>
                             </a>
                         </li>
                         <li class="btn btn2">
-                            <a href="subjects">Subjects</a>
+                            <a href="subjects?user={{user}}">Subjects</a>
                         </li>
                         <li class="btn btn3">
-                            <a href="math">Maths</a>
+                            <a href="math?user={{user}}">Maths</a>
                         </li>
                     </ul>
                 </div>
@@ -194,7 +202,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="col-md-3 product-men">
                         <div class="product-chr-info chr">
                             <div class="thumbnail">
-                                <a href="single_product?book={{x['name']}}" >
+                                <a href="single_product?user={{user}}?book={{x['name']}}" >
                                     <img src="{{x['link']}}" alt="">
                                 </a>
                             </div>
@@ -230,7 +238,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         </li>
                                     </ul>
                                     <ul class="price-list">
-                                        <li>{{x["gia"]}} VND</li>
+                                        <li>{{x["giagiam"]}} VND</li>
                                         <li>
                                             {{x["gia"]}} VND
                                         </li>
@@ -290,7 +298,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <!-- footer-grid1 -->
                     <div class="col-md-3 col-sm-6 footer-logo">
                         <h3>
-                            <a href="/">LTT</a>
+                            <a href="/?user={{user}}">LTT</a>
                         </h3>
                         <h4>about us</h4>
                         <p>Vallis Molestie Arcu Morbi Dapibus Suscipit Ante Sit Efficitur Eu estie Arcu Mor Anestie Ate Vesti.</p>
@@ -304,13 +312,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <a href="/">Home</a>
                             </li>
                             <li>
-                                <a href="about">About us</a>
+                                <a href="about?user={{user}}">About us</a>
                             </li>
                             <li>
-                                <a href="subjects">Subjects</a>
+                                <a href="subjects?user={{user}}">Subjects</a>
                             </li>
                             <li>
-                                <a href="contact">contact us</a>
+                                <a href="contact?user={{user}}">contact us</a>
                             </li>
                         </ul>
                     </div>

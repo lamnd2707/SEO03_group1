@@ -56,7 +56,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <span class="icon-bar"></span>
                         </button>
                         <h1>
-                            <a class="navbar-brand" href="/">LTT</a>
+                            <a class="navbar-brand" href="/?user={{user}}">LTT</a>
                         </h1>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -67,42 +67,55 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <a class="page-scroll" href="#page-top"></a>
                             </li>
                             <li>
-                                <a href="/">Home</a>
+                                <a href="/?user={{user}}">Home</a>
                             </li>
                             <li>
                                 <a href="#team">about us</a>
                             </li>
 
                             <li class="dropdown">
-                                <a href="subjects" class="dropdown-toggle effect-3">subjects
+                                <a href="subjects?user={{user}}" class="dropdown-toggle effect-3">subjects
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="math">Math</a>
+                                        <a href="math?user={{user}}">Math</a>
                                     </li>
                                     <li>
-                                        <a href="physical">Physical</a>
+                                        <a href="physical?user={{user}}">Physical</a>
                                     </li>
                                     <li>
-                                        <a href="chemistry">Chemistry</a>
+                                        <a href="chemistry?user={{user}}">Chemistry</a>
                                     </li>
                                     <li>
-                                        <a href="informatics">Informatics</a>
+                                        <a href="informatics?user={{user}}">Informatics</a>
                                     </li>
                                     <li>
-                                        <a href="literarys">Literary</a>
+                                        <a href="literarys?user={{user}}">Literary</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="contact">Contact us</a>
+                                <a href="contact?user={{user}}">Contact us</a>
                             </li>
+                            {%if user == "None" or user == None%}
                             <li>
                                 <a href="login" title="SignIn & SignUp">
                                     <span class="fa fa-user nav-icon" aria-hidden="true"></span>
                                 </a>
                             </li>
+                            {%else%}
+                            <li class="dropdown">
+                                <a href="#" >
+                                    {{flname}}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/">Log out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {%endif%}
 
                         </ul>
                         <!-- search-bar -->
@@ -127,13 +140,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <!-- shopping cart -->
                         <div class="cart-mainf">
                             <div class="chrcart chrcart2 cart cart box_1">
-                                <form action="#" method="post" class="last">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="display" value="1">
-                                    <button class="top_chr_cart" type="submit" name="submit" value="">
-                                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    </button>
-                                </form>
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span></span><span></span>
+                                <a href="checkout?user={{user}}"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <!-- //shopping cart ends here -->
@@ -185,7 +193,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <li>
                                 <i class="fa fa-play-circle-o" aria-hidden="true"></i>Literarys</li>
                         </ul>
-                        <a href="subjects">view more</a>
+                        <a href="subjects?user={{user}}">view more</a>
                     </div>
                     <!-- about left bottom - services -->
                     <div class="principles-grids principles-grids1">
@@ -197,7 +205,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     </div>
                                     <h4 class="mission agileits LTT">law library</h4>
                                     <div class="description agileits LTT">
-                                        <a href="law">Read More</a>
+                                        <a href="law?user={{user}}">Read More</a>
                                     </div>
                                 </div>
                             </div>
@@ -523,27 +531,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <span class="abtext">Subjects</span>
                 </h4>
                 <div class="col-md-31 col-sm-3 col-xs-3 fimg1">
-                    <a href="math">
+                    <a href="math?user={{user}}">
                         <img src="static/images/f1.png" class="img+responsive" alt="LTT-image">
                     </a>
                 </div>
                 <div class="col-md-31 col-sm-3 col-xs-3 fimg1">
-                    <a href="physical">
+                    <a href="physical?user={{user}}">
                         <img src="static/images/f2.png" class="img+responsive" alt="LTT-image">
                     </a>
                 </div>
                 <div class="col-md-31 col-sm-3 col-xs-3 fimg1">
-                    <a href="chemistry">
+                    <a href="chemistry?user={{user}}">
                         <img src="static/images/f3.png" class="img+responsive" alt="LTT-image">
                     </a>
                 </div>
                 <div class="col-md-31 col-sm-3 col-xs-3 fimg1">
-                    <a href="informatics">
+                    <a href="informatics?user={{user}}">
                         <img src="static/images/f4.png" class="img+responsive" alt="LTT-image">
                     </a>
                 </div>
                 <div class="col-md-31 col-sm-3 col-xs-3 fimg1">
-                    <a href="literarys">
+                    <a href="literarys?user={{user}}">
                         <img src="static/images/f5.png" class="img+responsive" alt="LTT-image">
                     </a>
                 </div>
@@ -580,7 +588,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <!-- footer-grid1 -->
                     <div class="col-md-3 col-sm-6 footer-logo">
                         <h3>
-                            <a href="/">LTT</a>
+                            <a href="/?user={{user}}">LTT</a>
                         </h3>
                         <h4>about us</h4>
                         <p>Vallis Molestie Arcu Morbi Dapibus Suscipit Ante Sit Efficitur Eu estie Arcu Mor Anestie Ate Vesti.</p>
@@ -591,16 +599,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <h4>navigation</h4>
                         <ul>
                             <li>
-                                <a href="/">Home</a>
+                                <a href="/?user={{user}}">Home</a>
                             </li>
                             <li>
                                 <a href="#team">About us</a>
                             </li>
                             <li>
-                                <a href="subjects">Subjects</a>
+                                <a href="subjects?user={{user}}">Subjects</a>
                             </li>
                             <li>
-                                <a href="contact">contact us</a>
+                                <a href="contact?user={{user}}">contact us</a>
                             </li>
                         </ul>
                     </div>

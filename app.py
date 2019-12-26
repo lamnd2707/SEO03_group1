@@ -24,7 +24,20 @@ def loginmanage():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-  return render_template('index.html')
+  if request.method == 'GET':
+    user = request.args.get('user')
+    print(user)
+    col = db["Reader"]
+    res = list(col.find({"email":user}))
+    try:
+        flname = res[0]['fname'] + " " + res[0]['lname']
+    except:
+        flname = ""
+        user = None
+    if user == "None" or user is None:
+        return render_template('index.html',user="None")
+    else:
+        return render_template('index.html', user=user,flname=flname)
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
@@ -41,33 +54,98 @@ def dashboard():
 
 @app.route('/math', methods=['GET', 'POST'])
 def math():
-    subs = find_pro("Book","Toan")
-    print(subs)
-    return render_template('math.html', subs = subs)
+    if request.method == 'GET':
+        user = request.args.get('user')
+        print(user)
+        subs = find_pro("Book","Toan")
+        print(subs)
+        col = db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+        if user == "None" or user is None:
+            return render_template('math.html', subs = subs, user="None")
+        else:
+            return render_template('math.html', subs = subs, user=user,flname=flname)
 
 @app.route('/physical', methods=['GET', 'POST'])
 def physical():
-    subs = find_pro("Book", "Ly")
-    print(subs)
-    return render_template('physical.html', subs = subs)
+    if request.method == 'GET':
+        user = request.args.get('user')
+        print(user)
+        subs = find_pro("Book", "Ly")
+        print(subs)
+        col = db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+        if user == "None" or user is None:
+            return render_template('physical.html', subs = subs, user="None")
+        else:
+            return render_template('physical.html', subs = subs,user=user,flname=flname)
 
 @app.route('/chemistry', methods=['GET', 'POST'])
 def chemistry():
-    subs = find_pro("Book", "Hoa")
-    print(subs)
-    return render_template('chemistry.html',subs = subs)
+    if request.method == 'GET':
+        user = request.args.get('user')
+        print(user)
+        subs = find_pro("Book", "Hoa")
+        print(subs)
+        col = db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+        if user == "None" or user is None:
+            return render_template('chemistry.html', subs=subs, user="None")
+        else:
+            return render_template('chemistry.html',subs = subs,user=user,flname=flname)
 
 @app.route('/informatics', methods=['GET', 'POST'])
 def informatics():
-    subs = find_pro("Book", "Tin")
-    print(subs)
-    return render_template('informatics.html', subs = subs)
+    if request.method == 'GET':
+        user = request.args.get('user')
+        print(user)
+        subs = find_pro("Book", "Tin")
+        print(subs)
+        col = db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+        if user == "None" or user is None:
+            return render_template('informatics.html', subs=subs, user="None")
+        else:
+            return render_template('informatics.html', subs = subs,user=user,flname=flname)
 
 @app.route('/literarys', methods=['GET', 'POST'])
 def literarys():
-    subs = find_pro("Book", "Van")
-    print(subs)
-    return render_template('literarys.html',subs = subs)
+    if request.method == 'GET':
+        user = request.args.get('user')
+        print(user)
+        subs = find_pro("Book", "Van")
+        print(subs)
+        col = db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+        if user == "None" or user is None:
+            return render_template('literarys.html', subs=subs, user="None")
+        else:
+            return render_template('literarys.html',subs = subs,user=user,flname=flname)
 
 @app.route('/tables', methods=['GET', 'POST'])
 def tables():
@@ -111,9 +189,22 @@ def after_add(admin):
 
 @app.route('/subjects', methods=['GET', 'POST'])
 def subjects():
-    subs = subs_find("Book")
+    if request.method == 'GET':
+        user = request.args.get('user')
+        print(user)
+        subs = subs_find("Book")
     # print(subs)
-    return render_template('subjects.html',subs=subs)
+        col = db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+        if user == "None" or user is None:
+            return render_template('subjects.html', subs=subs, user="None")
+        else:
+            return render_template('subjects.html',subs=subs,user=user,flname=flname)
 
 @app.route('/shop', methods=['GET', 'POST'])
 def shop():
@@ -123,13 +214,25 @@ def shop():
 @app.route('/single_product', methods=['GET', 'POST'])
 def single_product():
   if request.method == 'GET':
-    book = str(request.args.get('book')).strip()
-    print(book)
+    # book = str(request.args.get('book')).strip()
+    user = str(request.args.get('user')).strip()
     col = db["Book"]
+    book = user.split("?")[1]
+    book = book.split("=")[1]
     subs = list(col.find({'name': {'$regex':str(book)}} ))
-    print(subs)
+    user = user.split("?")[0]
+    col2 = db["Reader"]
+    res = list(col2.find({"email": user}))
+    try:
+        flname = res[0]['fname'] + " " + res[0]['lname']
+    except:
+        flname = ""
+        user = None
+    if user == "None" or user is None:
+        return render_template('single_product.html', subs=subs, user="None")
+    else:
+        return render_template('single_product.html', subs=subs, user=user, flname=flname)
 
-  return render_template('single_product.html',subs=subs)
 
 @app.route('/payment', methods=['GET', 'POST'])
 def payment():
@@ -160,7 +263,20 @@ def login():
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():
-  return render_template('about.html')
+    if request.method == 'GET':
+        user = request.args.get('user')
+        print(user)
+        col = db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+        if user == "None" or user is None:
+            return render_template('about.html', subs=subs, user="None")
+        else:
+            return render_template('about.html',user=user,flname=flname)
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
@@ -178,16 +294,54 @@ def search():
 
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
-  return render_template('checkout.html')
+    if request.method == 'GET':
+        user = request.args.get('user')
+        print(user)
+        col = db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+        if user == "None" or user is None:
+            return render_template('checkout.html', subs=subs, user="None")
+        else:
+            return render_template('checkout.html',user=user,flname=flname)
 
 @app.route('/law', methods=['GET', 'POST'])
 def law():
-  return render_template('law.html')
+    if request.method == 'GET':
+        user = request.args.get('user')
+        print(user)
+        col = db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+        if user == "None" or user is None:
+            return render_template('law.html', subs=subs, user="None")
+        else:
+            return render_template('law.html',user=user,flname=flname)
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
-
-    return render_template('contact.html')
+    if request.method == 'GET':
+        user = request.args.get('user')
+        print(user)
+        col = db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+        if user == "None" or user is None:
+            return render_template('contact.html', subs=subs, user="None")
+        else:
+            return render_template('contact.html',user=user,flname=flname)
 
 if __name__ == "__main__":
     app.run(debug=True)
