@@ -342,6 +342,44 @@ def contact():
             return render_template('contact.html', user="None")
         else:
             return render_template('contact.html',user=user,flname=flname)
+@app.route('/edit', methods=['GET', 'POST'])
+def edit():
+    if request.method == 'GET':
+        admin = str(request.args.get('admin')).strip()
+        print(admin)
+        col = db["Book"]
+        book = admin.split("?")[1]
+        book = book.split("=")[1]
+        subs = list(col.find({'name': {'$regex':str(book)}} ))
+        admin = admin.split("?")[0]
+        col = db['Admin']
+        print(subs[0])
+        if (admin is None) or (admin =="None") or (len(list(col.find({"name":str(admin)}))) == 0):
+          return render_template('loginmanage.html', error="Please Login")
+        else:
+          return render_template('edit.html', admin = admin, subs=subs)
+
+@app.route('/edit?admin=<admin>?id=<id>', methods=['GET', 'POST'])
+def after_edit(admin,id):
+  if request.method == 'POST':
+    mon = request.form['select_subs']
+    name = request.form['name']
+    nxb = request.form['nxb']
+    tacgia = request.form['tacgia']
+    language = request.form['language']
+    link = request.form['link']
+    gia = request.form['gia']
+    giagiam = request.form['giagiam']
+    description = request.form['description']
+    thoihan = request.form['thoihan']
+    col = db["Book"]
+    print(admin,id)
+    col.update_one({"name": id}, {"$set": {"mon": mon, "name": name, "tacgia": tacgia, "gia": gia, "nxb": nxb, "giagiam" : giagiam, "language":language, "link":link, "thoihan":thoihan,"description":description}})
+    print("sucess")
+    # print(mon,name,nxb,tacgia,language,link,giagiam,gia,description,thoihan,col)
+    # col.insert({"mon": mon, "name": name, "tacgia": tacgia, "gia": gia, "nxb": nxb, "giagiam" : giagiam, "language":language, "link":link, "thoihan":thoihan,"description":description})
+    alert = "Sucess"
+    return render_template('edit.html',admin=admin,alert=alert)
 
 if __name__ == "__main__":
     app.run(debug=True)

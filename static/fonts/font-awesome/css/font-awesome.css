@@ -108,6 +108,12 @@ ul.icons li [class*=" icon-"] {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
+a.edit {
+  text-align: right;
+}
+i.icon-pencil {
+    text-align: right;
+}
 .icon-2x {
   font-size: 2em;
 }

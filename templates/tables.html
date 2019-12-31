@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="static/css/select2.css" />
 <link rel="stylesheet" href="static/css/matrix-style.css" />
 <link rel="stylesheet" href="static/css/matrix-media.css" />
-<link href="static/fonts/font-awesome/css/font-awesomemanage.css" rel="stylesheet" />
+<link href="static/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -72,15 +72,17 @@
                   <th>Author</th>
                   <th>Publishing company</th>
                   <th>Cost</th>
+                  <th> Delete</th>
                 </tr>
               </thead>
               <tbody>
                 {% for x in prod %}
                 <tr class="gradeX">
-                  <td>{{x['name']}}</td>
+                  <td>{{x['name']}}   &nbsp;<a href="edit?admin={{admin}}?book={{x['name']}}" id="clickedit" title="Edit"><i class="icon-pencil"></i></i></a> </td>
                   <td>{{x['tacgia']}}</td>
                   <td>{{x['nxb']}}</td>
                   <td class="center">{{x['gia']}}</td>
+                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="icon-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 {% endfor %}
               </tbody>

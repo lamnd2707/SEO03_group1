@@ -21,6 +21,11 @@ body {
 }
 #sidebar > ul > li.active a{ color:#fff; text-decoration:none;}
 
+#btnok {
+
+	background-color: #5CFB63;
+}
+
 #sidebar > ul > li > a > .label {
 	background-color:#F66;
 }
