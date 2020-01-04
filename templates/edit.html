@@ -85,7 +85,7 @@
             </div>
         {%else%}
         <div class="widget-content nopadding">
-          <form action="{{url_for('after_edit',admin=admin,id=subs[0]['name'])}}" method="POST" class="form-horizontal">
+          <form action="{{url_for('after_edit',admin=admin,id=subs[0]['id'])}}" method="POST" class="form-horizontal">
             <div class="control-group">
               <label class="control-label">Subject</label>
               <div class="controls">
@@ -137,9 +137,7 @@
             <div class="control-group">
               <label class="control-label">Description</label>
               <div class="controls">
-                <textarea rows="8" cols="70" name="description">
-                  {{subs[0]['description']}}
-                  </textarea>
+                <textarea rows="8" cols="70" name="description" required>{{subs[0]['description']}}</textarea>
                 <!-- <input type="text" name="description" value="{{subs[0]['description']}}" required/> -->
               </div>
             </div>

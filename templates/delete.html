@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>LTT Manage</title>
+<title>LTT Delete</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="static/css/bootstrap.min.css" />
@@ -64,8 +64,8 @@
 
 <div id="content">
 <div id="content-header">
-  <div id="breadcrumb"> <a href="dashboard" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Add Product</a> </div>
-  <h1>Add Products</h1>
+  <div id="breadcrumb"> <a href="dashboard" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Delete Product</a> </div>
+  <h1>Edit Products</h1>
 </div>
 <div class="container-fluid">
   <hr>
@@ -75,91 +75,90 @@
         <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
           <h5>Product-info</h5>
         </div>
-        {%if alert!=""%}
-          <div class="alert success">
+        {%if alert%}
+        <div class="alert delete">
           <span class="closebtn">&times;</span>  
-          <strong>Success!</strong> Import product sucessful.
+          <strong>Success!</strong> Delete product sucessful.
         </div>
         <div class="form-actions">
               <a href="tables?admin={{admin}}"><input class="btn" id="btnok" type="button" value="OK"></a>
             </div>
         {%else%}
         <div class="widget-content nopadding">
-          <form action="{{url_for('after_add', admin=admin)}}" method="POST" class="form-horizontal">
+          <form action="{{url_for('after_delete',admin=admin,id=subs[0]['id'])}}" method="POST" class="form-horizontal">
             <div class="control-group">
               <label class="control-label">Subject</label>
               <div class="controls">
-                <select name="select_subs">
-                  <option value="Toan">Math</option>
-                  <option value="Tin">Informatics</option>
-                  <option value="Ly">Physic</option>
-                  <option value="Hoa">Chemistry</option>
-                  <option value="Van">Literary</option>
+                <select name="select_subs" disabled="true">
+                  <option value="mon">Math</option>
                 </select>
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Name</label>
               <div class="controls">
-                <input type="text" name="name" placeholder="Name" required />
+                <input type="text" name="name" value="{{subs[0]['name']}}" readonly />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Author</label>
               <div class="controls">
-                <input type="text" name="tacgia" placeholder="Author" required />
+                <input type="text" name="tacgia" value="{{subs[0]['tacgia']}}" readonly />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Publishing Company</label>
               <div class="controls">
-                <input type="text" name="nxb" placeholder="Publishing Company" required />
+                <input type="text" name="nxb" value="{{subs[0]['nxb']}}" readonly />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Cost</label>
               <div class="controls">
-                <input type="text" name="gia" placeholder="Cost" required/>
+                <input type="text" name="gia" value="{{subs[0]['gia']}}" readonly/>
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Link</label>
               <div class="controls">
-                <input type="text" name="link" placeholder="Link" required/>
+                <input type="text" name="link" value="{{subs[0]['link']}}" readonly/>
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Language</label>
               <div class="controls">
-                <input type="text" name="language" placeholder="Language" required/>
+                <input type="text" name="language" value="{{subs[0]['language']}}" readonly/>
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Description</label>
               <div class="controls">
-                <textarea rows="8" cols="70" name="description" required></textarea>
-                <!-- <input type="text" name="description" placeholder="Description" required/> -->
+                <textarea rows="8" cols="70" name="description" readonly>
+                  {{subs[0]['description']}}
+                  </textarea>
+                <!-- <input type="text" name="description" value="{{subs[0]['description']}}" readonly/> -->
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Cost Discounted</label>
               <div class="controls">
-                <input type="text" name="giagiam" placeholder="Cost Discounted" required/>
+                <input type="text" name="giagiam" value="{{subs[0]['giagiam']}}" readonly/>
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Time Limit</label>
               <div class="controls">
-                <select name="thoihan">
-                  <option value="30">30 days</option>
-                  <option value="90">90 days</option>
-                  <option value="150">150 days</option>
+                <select name="thoihan" disabled="true">
+                  <option value="30" selected="selected">{{subs[0]['thoihan']}} days</option>
                 </select>
               </div>
             </div>
             <div class="form-actions">
-              <button type="submit" class="btn btn-success">Add</button>
+              <button type="submit" class="btn btn-success">Delete</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="tables?admin={{admin}}"><input class="btn" type="button" value="Cancel"></a>
             </div>
+
           </form>
         </div>
         {%endif%}

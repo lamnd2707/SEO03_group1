@@ -78,11 +78,11 @@
               <tbody>
                 {% for x in prod %}
                 <tr class="gradeX">
-                  <td>{{x['name']}}   &nbsp;<a href="edit?admin={{admin}}?book={{x['name']}}" id="clickedit" title="Edit"><i class="icon-pencil"></i></i></a> </td>
+                  <td>{{x['name']}}   &nbsp;<a href="edit?admin={{admin}}?id={{x['id']}}" id="clickedit" title="Edit"><i class="icon-pencil"></i></i></a> </td>
                   <td>{{x['tacgia']}}</td>
                   <td>{{x['nxb']}}</td>
                   <td class="center">{{x['gia']}}</td>
-                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="icon-trash" aria-hidden="true"></i></a></td>
+                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="delete?admin={{admin}}?id={{x['id']}}"><button type="submit" class="btn btn-delete"><i class="icon-trash" aria-hidden="true"></i></button></a></td>
                 </tr>
                 {% endfor %}
               </tbody>

@@ -1,12 +1,12 @@
 from flask import Flask, render_template, url_for, redirect, request
 from pymongo import MongoClient
-from data import find_pro, count, subs_find
+from data import find_pro, count, subs_find, filter_book
 
 app = Flask(__name__)
 myclient = MongoClient("mongodb://localhost:27017/")
 
 db = myclient["Website"]
-print("sucess")
+# print("sucess")
 
 @app.route('/loginmanage', methods=['GET', 'POST'])
 def loginmanage():
@@ -26,7 +26,7 @@ def loginmanage():
 def index():
   if request.method == 'GET':
     user = request.args.get('user')
-    print(user)
+    # print(user)
     col = db["Reader"]
     res = list(col.find({"email":user}))
     try:
@@ -56,9 +56,9 @@ def dashboard():
 def math():
     if request.method == 'GET':
         user = request.args.get('user')
-        print(user)
+        # print(user)
         subs = find_pro("Book","Toan")
-        print(subs)
+        # print(subs)
         col = db["Reader"]
         res = list(col.find({"email": user}))
         try:
@@ -75,9 +75,9 @@ def math():
 def physical():
     if request.method == 'GET':
         user = request.args.get('user')
-        print(user)
+        # print(user)
         subs = find_pro("Book", "Ly")
-        print(subs)
+        # print(subs)
         col = db["Reader"]
         res = list(col.find({"email": user}))
         try:
@@ -94,9 +94,9 @@ def physical():
 def chemistry():
     if request.method == 'GET':
         user = request.args.get('user')
-        print(user)
+        # print(user)
         subs = find_pro("Book", "Hoa")
-        print(subs)
+        # print(subs)
         col = db["Reader"]
         res = list(col.find({"email": user}))
         try:
@@ -113,9 +113,9 @@ def chemistry():
 def informatics():
     if request.method == 'GET':
         user = request.args.get('user')
-        print(user)
+        # print(user)
         subs = find_pro("Book", "Tin")
-        print(subs)
+        # print(subs)
         col = db["Reader"]
         res = list(col.find({"email": user}))
         try:
@@ -132,9 +132,9 @@ def informatics():
 def literarys():
     if request.method == 'GET':
         user = request.args.get('user')
-        print(user)
+        # print(user)
         subs = find_pro("Book", "Van")
-        print(subs)
+        # print(subs)
         col = db["Reader"]
         res = list(col.find({"email": user}))
         try:
@@ -149,14 +149,15 @@ def literarys():
 
 @app.route('/tables', methods=['GET', 'POST'])
 def tables():
-  if request.method == 'GET':
-    admin = request.args.get('admin')
-    prod = subs_find("Book")
-    col = db["Admin"]
-    if (admin is None) or (admin =="None") or (len(list(col.find({"name":str(admin)}))) == 0):
-      return render_template('loginmanage.html', error="Please Login")
-    else:
-      return render_template('tables.html', admin=admin, prod=prod)
+    if request.method == 'GET':
+        admin = request.args.get('admin')
+        prod = subs_find("Book")
+        col = db["Admin"]
+        if (admin is None) or (admin =="None") or (len(list(col.find({"name":str(admin)}))) == 0):
+          return render_template('loginmanage.html', error="Please Login")
+        else:
+          return render_template('tables.html', admin=admin, prod=prod)
+
 
 @app.route('/form-common', methods=['GET', 'POST'])
 def form_common():
@@ -172,18 +173,19 @@ def form_common():
 @app.route('/form-common?admin=<admin>', methods=['GET', 'POST'])
 def after_add(admin):
   if request.method == 'POST':
-    mon = request.form['select_subs']
-    name = request.form['name']
-    nxb = request.form['nxb']
-    tacgia = request.form['tacgia']
-    language = request.form['language']
-    link = request.form['link']
-    gia = request.form['gia']
-    giagiam = request.form['giagiam']
-    description = request.form['description']
-    thoihan = request.form['thoihan']
+    mon = request.form['select_subs'].strip()
+    name = request.form['name'].strip()
+    nxb = request.form['nxb'].strip()
+    tacgia = request.form['tacgia'].strip()
+    language = request.form['language'].strip()
+    link = request.form['link'].strip()
+    gia = request.form['gia'].strip()
+    giagiam = request.form['giagiam'].strip()
+    description = request.form['description'].strip()
+    thoihan = request.form['thoihan'].strip()
     col = db["Book"]
-    col.insert({"mon": mon, "name": name, "tacgia": tacgia, "gia": gia, "nxb": nxb, "giagiam" : giagiam, "language":language, "link":link, "thoihan":thoihan,"description":description})
+    a = str(int(col.count()) + 1)
+    col.insert({"id": a, "mon": mon, "name": name, "tacgia": tacgia, "gia": gia, "nxb": nxb, "giagiam" : giagiam, "language":language, "link":link, "thoihan":thoihan,"description":description})
     alert = "abcdsdsd"
     return render_template('form-common.html',admin=admin,alert=alert)
 
@@ -191,7 +193,7 @@ def after_add(admin):
 def subjects():
     if request.method == 'GET':
         user = request.args.get('user')
-        print(user)
+        # print(user)
         subs = subs_find("Book")
     # print(subs)
         col = db["Reader"]
@@ -202,6 +204,37 @@ def subjects():
             flname = ""
             user = None
         if user == "None" or user is None:
+            return render_template('subjects.html', subs=subs, user="None")
+        else:
+            return render_template('subjects.html',subs=subs,user=user,flname=flname)
+
+@app.route('/subjects?user=<user>', methods=['GET', 'POST'])
+def filter_subjects(user):
+    if request.method == 'POST':
+        # print(user)
+        try:
+            mon = request.form['mon']
+        except:
+            mon = ""
+        try:
+            thoihan = request.form['time_limit']
+        except:
+            thoihan = ""
+        try:
+            language = request.form['language']
+        except:
+            language = ""
+        print(mon)
+        subs = filter_book(mon,thoihan,language)
+        print(subs)
+        col = db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+        if user == "None" or user is None or user == "" or len(res)==0:
             return render_template('subjects.html', subs=subs, user="None")
         else:
             return render_template('subjects.html',subs=subs,user=user,flname=flname)
@@ -274,23 +307,32 @@ def about():
             flname = ""
             user = None
         if user == "None" or user is None:
-            return render_template('about.html', subs=subs, user="None")
+            return render_template('about.html', user="None")
         else:
             return render_template('about.html',user=user,flname=flname)
 
-@app.route('/search', methods=['GET', 'POST'])
-def search():
+@app.route('/search?user=<user>', methods=['GET', 'POST'])
+def search(user):
     if request.method == 'POST':
-        query = request.form['Search']
+        query = request.form['Search'].strip()
         query1 = query.lower()
         col = db['Book']
-        subs = list(col.find({'name': {'$regex': query1}} ))
+        subs = list(col.find({'name': {'$regex': query1}}))
         query2 = query1.capitalize()
-        subs1 = list(col.find({'name': {'$regex': query2}} ))
+        subs1 = list(col.find({'name': {'$regex': query2}}))
         for i in subs1:
           subs.append(i)
         print(subs)
-    return render_template('search.html', subs=subs, query=query)
+        col=db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+    else:
+        user = None
+    return render_template('search.html',user=user, flname=flname, subs=subs, query=query)
 
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
@@ -348,12 +390,12 @@ def edit():
         admin = str(request.args.get('admin')).strip()
         print(admin)
         col = db["Book"]
-        book = admin.split("?")[1]
-        book = book.split("=")[1]
-        subs = list(col.find({'name': {'$regex':str(book)}} ))
+        ids = admin.split("?")[1]
+        ids = ids.split("=")[1]
+        subs = list(col.find({'id': ids} ))
         admin = admin.split("?")[0]
         col = db['Admin']
-        print(subs[0])
+        # print(subs[0]['id'])
         if (admin is None) or (admin =="None") or (len(list(col.find({"name":str(admin)}))) == 0):
           return render_template('loginmanage.html', error="Please Login")
         else:
@@ -362,24 +404,56 @@ def edit():
 @app.route('/edit?admin=<admin>?id=<id>', methods=['GET', 'POST'])
 def after_edit(admin,id):
   if request.method == 'POST':
-    mon = request.form['select_subs']
-    name = request.form['name']
-    nxb = request.form['nxb']
-    tacgia = request.form['tacgia']
-    language = request.form['language']
-    link = request.form['link']
-    gia = request.form['gia']
-    giagiam = request.form['giagiam']
-    description = request.form['description']
-    thoihan = request.form['thoihan']
+    mon = request.form['select_subs'].strip()
+    name = request.form['name'].strip()
+    nxb = request.form['nxb'].strip()
+    tacgia = request.form['tacgia'].strip()
+    language = request.form['language'].strip()
+    link = request.form['link'].strip()
+    gia = request.form['gia'].strip()
+    giagiam = request.form['giagiam'].strip()
+    description = request.form['description'].strip()
+    thoihan = request.form['thoihan'].strip()
     col = db["Book"]
     print(admin,id)
-    col.update_one({"name": id}, {"$set": {"mon": mon, "name": name, "tacgia": tacgia, "gia": gia, "nxb": nxb, "giagiam" : giagiam, "language":language, "link":link, "thoihan":thoihan,"description":description}})
-    print("sucess")
-    # print(mon,name,nxb,tacgia,language,link,giagiam,gia,description,thoihan,col)
-    # col.insert({"mon": mon, "name": name, "tacgia": tacgia, "gia": gia, "nxb": nxb, "giagiam" : giagiam, "language":language, "link":link, "thoihan":thoihan,"description":description})
+    col.update_one({"id": id}, {"$set": {"mon": mon, "name": name, "tacgia": tacgia, "gia": gia, "nxb": nxb, "giagiam" : giagiam, "language":language, "link":link, "thoihan":thoihan,"description":description}})
+    # print("sucess")
     alert = "Sucess"
     return render_template('edit.html',admin=admin,alert=alert)
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+    if request.method == 'GET':
+        admin = str(request.args.get('admin')).strip()
+        # print(admin)
+        col = db["Book"]
+        ids = admin.split("?")[1]
+        ids = ids.split("=")[1]
+        subs = list(col.find({'id': str(ids)} ))
+        admin = admin.split("?")[0]
+        col = db['Admin']
+        print(subs[0]['id'])
+        if subs[0]['mon'] == "Toan":
+            subs[0]['mon'] = "Math"
+        elif subs[0]['mon'] == "Tin":
+            subs[0]['mon'] = "Informatics"
+        elif subs[0]['mon'] == "Ly":
+            subs[0]['mon'] = "Physic"
+        elif subs[0]['mon'] == "Van":
+            subs[0]['mon'] = "Literarys"
+        else:
+            subs[0]['mon'] = "Chemistry"
+        if (admin is None) or (admin =="None") or (len(list(col.find({"name":str(admin)}))) == 0):
+          return render_template('loginmanage.html', error="Please Login")
+        else:
+          return render_template('delete.html', admin = admin, subs=subs)
+@app.route('/delete?admin=<admin>?id=<id>', methods=['GET', 'POST'])
+def after_delete(admin,id):
+  if request.method == 'POST':
+    col = db["Book"]
+    col.delete_one({'id':id})
+    alert = "Sucess"
+    return render_template('delete.html',admin=admin,alert=alert)
 
 if __name__ == "__main__":
     app.run(debug=True)

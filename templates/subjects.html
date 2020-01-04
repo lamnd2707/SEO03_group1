@@ -8,7 +8,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="zxx">
 
 <head>
-    <title>LTT Education Category Bootstrap Responsive website Template | Shop Catalogue :: LTT</title>
+    <title>LTT | Subject</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="LTT Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -147,7 +147,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <!-- cd-header-buttons -->
                             </div>
                             <div id="cd-search" class="cd-search">
-                                <form action="{{url_for('search')}}" method="post">
+                                <form action="{{url_for('search',user=user)}}" method="POST">
                                     <input name="Search" type="search" placeholder="Type and Hit Enter...">
                                 </form>
                             </div>
@@ -210,60 +210,41 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <!-- product left -->
                 <div class="side-bar col-md-3">
                     <!--preference -->
-                    <form action="#" method="post">
+                    <form action="{{url_for('filter_subjects',user=user)}}" method="post">
                         <div class="left-side">
                             <h3 class="shopf-sear-headits-sear-head">
                                 Categories</h3>
                             <ul>
                                 <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Biographies</span>
+                                    <input type="checkbox" name="mon" value="Toan"> Math<br>
                                 </li>
                                 <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Fiction</span>
+                                    <input type="checkbox" name="mon" value="Tin"> Informatics<br>
                                 </li>
                                 <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Management</span>
+                                    <input type="checkbox" name="mon" value="Ly"> Physic<br>
                                 </li>
                                 <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Business</span>
+                                    <input type="checkbox" name="mon" value="Van"> Literary<br>
                                 </li>
-
-                            </ul>
-                        </div>
-                        <!-- // preference -->
-                        <!-- price range -->
-                        <div class="range">
-                            <h3 class="shopf-sear-headits-sear-head">
-                                <span>Price</span> range</h3>
-                            <ul class="dropdown-menu6">
                                 <li>
-
-                                    <div id="slider-range"></div>
-                                    <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;" />
+                                    <input type="checkbox" name="mon" value="Hoa"> Chemistry<br>
                                 </li>
                             </ul>
                         </div>
-                        <!-- //price range -->
                         <!--preference -->
                         <div class="left-side">
                             <h3 class="shopf-sear-headits-sear-head">
-                                <span>latest</span> arrivals</h3>
+                                <span>Time</span> Limit</h3>
                             <ul>
                                 <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">last 30 days</span>
+                                    <input type="checkbox" name="time_limit" value="30"> 30 days<br>
                                 </li>
                                 <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">last 90 days</span>
+                                    <input type="checkbox" name="time_limit" value="90"> 90 days<br>
                                 </li>
                                 <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">last 150 days</span>
+                                    <input type="checkbox" name="time_limit" value="150"> 150 days<br>
                                 </li>
 
                             </ul>
@@ -274,82 +255,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <h3 class="shopf-sear-headits-sear-head">Language</h3>
                             <ul>
                                 <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">English</span>
+                                    <input type="checkbox" name="language" value="English"> English<br>
                                 </li>
                                 <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Spanish</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Japanese</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">German</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Korean</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Chinese</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">French</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- //discounts -->
-                        <!-- Binding -->
-                        <div class="left-side">
-                            <h3 class="shopf-sear-headits-sear-head">Format</h3>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Hardcover</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Board Book</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Bundle</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Paperback</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">Audio Book</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- //Binding -->
-                        <!-- discounts -->
-                        <div class="left-side">
-                            <h3 class="shopf-sear-headits-sear-head">Discount</h3>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">5% - 20%</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">20% - 40%</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">40% - 60%</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" class="checked">
-                                    <span class="span">60% or more</span>
+                                    <input type="checkbox" name="language" value="Vietnamese"> Vietnamese<br>
                                 </li>
                             </ul>
                         </div>
