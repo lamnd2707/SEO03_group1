@@ -275,6 +275,7 @@ def payment():
 def login():
   col = db['Reader']
   error = None
+  user = "None"
   if request.method == 'POST':
       # print(request.form['username'])
       try:
@@ -292,7 +293,7 @@ def login():
           col.insert({"email": email, "fname": fname, "lname": lname, "pass": password})
           print("sucess")
           error = "Register successful, Please login!"
-  return render_template('login.html',error =error)
+  return render_template('login.html',error =error,user = user)
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():
@@ -315,13 +316,33 @@ def about():
 def search(user):
     if request.method == 'POST':
         query = request.form['Search'].strip()
+        print(query)
         query1 = query.lower()
         col = db['Book']
         subs = list(col.find({'name': {'$regex': query1}}))
+        subs2 = list(col.find({'tacgia': {'$regex': query1}}))
+        print(subs)
         query2 = query1.capitalize()
         subs1 = list(col.find({'name': {'$regex': query2}}))
+        subs3 = list(col.find({'tacgia': {'$regex': query2}}))
+        print(query2)
+        subs4 = list(col.find({'name': {'$regex': query}}))
+        subs5 = list(col.find({'tacgia': {'$regex': query}}))
         for i in subs1:
-          subs.append(i)
+            if i not in subs:
+                subs.append(i)
+        for i in subs2:
+            if i not in subs:
+                subs.append(i)
+        for i in subs3:
+            if i not in subs:
+                subs.append(i)
+        for i in subs4:
+            if i not in subs:
+                subs.append(i)
+        for i in subs5:
+            if i not in subs:
+                subs.append(i)
         print(subs)
         col=db["Reader"]
         res = list(col.find({"email": user}))
@@ -348,9 +369,11 @@ def checkout():
             flname = ""
             user = None
         if user == "None" or user is None:
-            return render_template('checkout.html', subs=subs, user="None")
+            return render_template('checkout.html', user="None")
         else:
             return render_template('checkout.html',user=user,flname=flname)
+    if request.method == 'POST':
+        return render_template('checkout.html', user="None")
 
 @app.route('/law', methods=['GET', 'POST'])
 def law():
@@ -365,7 +388,7 @@ def law():
             flname = ""
             user = None
         if user == "None" or user is None:
-            return render_template('law.html', subs=subs, user="None")
+            return render_template('law.html', user="None")
         else:
             return render_template('law.html',user=user,flname=flname)
 
