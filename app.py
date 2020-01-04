@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, jsonify
 from pymongo import MongoClient
 from data import find_pro, count, subs_find, filter_book
 
@@ -330,9 +330,10 @@ def search(user):
         except:
             flname = ""
             user = None
-    else:
-        user = None
-    return render_template('search.html',user=user, flname=flname, subs=subs, query=query)
+        if user == "None" or user is None:
+            return render_template('search.html', user="None",subs=subs, query=query)
+        else:
+            return render_template('search.html',user=user, flname=flname, subs=subs, query=query)
 
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
@@ -447,6 +448,7 @@ def delete():
           return render_template('loginmanage.html', error="Please Login")
         else:
           return render_template('delete.html', admin = admin, subs=subs)
+
 @app.route('/delete?admin=<admin>?id=<id>', methods=['GET', 'POST'])
 def after_delete(admin,id):
   if request.method == 'POST':
@@ -454,6 +456,43 @@ def after_delete(admin,id):
     col.delete_one({'id':id})
     alert = "Sucess"
     return render_template('delete.html',admin=admin,alert=alert)
+
+@app.route('/autocomplete', methods=['GET'])
+def autocomplete():
+    datas = request.args.get('q')
+    query1 = datas.lower()
+    col = db['Book']
+    subs = list(col.find({'name': {'$regex': query1}},{'_id':False} ))
+    subs2 = list(col.find({'tacgia': {'$regex': query1}},{'_id':False} ))
+    query2 = query1.capitalize()
+    subs1 = list(col.find({'name': {'$regex': query2}},{'_id':False}  ))
+    subs3 = list(col.find({'tacgia': {'$regex': query2}},{'_id':False} ))
+    for i in subs1:
+        if i not in subs:
+            subs.append(i)
+    for i in subs2:
+        if i not in subs:
+            subs.append(i)
+    for i in subs3:
+        if i not in subs:
+            subs.append(i)
+    autosubs =[]
+    for i in subs:
+        if i['name'].strip() not in autosubs:
+            autosubs.append(i['name'].strip())
+        if i['tacgia'].strip() not in autosubs:
+            print(i['tacgia'])
+            autosubs.append(i['tacgia'].strip())
+        if i['language'] not in autosubs:
+            autosubs.append(i['language'])
+    # print(autosubs)
+    matching1 = [s for s in autosubs if query1 in s]
+    matching2 = [s for s in autosubs if query2 in s]
+    for i in matching1:
+        if i not in matching2:
+            matching2.append(i)
+    # print(matching2)
+    return jsonify(matching_results=matching2)
 
 if __name__ == "__main__":
     app.run(debug=True)

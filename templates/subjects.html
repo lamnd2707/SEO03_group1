@@ -26,6 +26,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="static/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
     <!-- shop css -->
     <link href="static/css/shop.css" type="text/css" rel="stylesheet" media="all">
+    <link href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
     <!-- checkout css -->
     <link href="static/css/checkout.css" type="text/css" rel="stylesheet" media="all">
     <!-- Range-slider-css -->
@@ -148,7 +149,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </div>
                             <div id="cd-search" class="cd-search">
                                 <form action="{{url_for('search',user=user)}}" method="POST">
-                                    <input name="Search" type="search" placeholder="Type and Hit Enter...">
+                                    <input id="input-search"name="Search" type="search" placeholder="Type and Hit Enter...">
                                 </form>
                             </div>
                         </div>
@@ -576,6 +577,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- smoothscroll -->
     <script src="static/js/SmoothScroll.min.js"></script>
     <!-- //smoothscroll -->
+    <script>
+        $(function() {
+            $("#input-search").autocomplete({
+                source:function(request, response) {
+                    $.getJSON("{{url_for('autocomplete')}}",{
+                        q: request.term, // in flask, "q" will be the argument to look for using request.args
+                    }, function(data) {
+                        response(data.matching_results); // matching_results from jsonify
+                        console.log(data.matching_results);
+                    });
+                },
+                minLength: 2,
+                select: function(event, ui) {
+                    console.log(ui.item.value); // not in your question, but might help later
+                }
+            });
+        })
+  
+    </script>
+ <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 
 </body>
 
