@@ -8,7 +8,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="zxx">
 
 <head>
-    <title>LTT Education Category Bootstrap Responsive website Template | Checkout :: LTT</title>
+    <title>LTT | Checkout</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="LTT Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -71,43 +71,56 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <a class="page-scroll" href="#page-top"></a>
                             </li>
                             <li>
-                                <a href="/">Home</a>
+                                <a href="/?user={{user}}">Home</a>
                             </li>
                             <li class="active">
-                                <a href="about">about us</a>
+                                <a href="about?user={{user}}">about us</a>
                             </li>
 
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">footers
+                                <a href="subjects?user={{user}}" class="dropdown-toggle effect-3">Subjects
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="footer">Default</a>
+                                        <a href="math?user={{user}}">Math</a>
                                     </li>
                                     <li>
-                                        <a href="footer1">variant1</a>
+                                        <a href="physical?user={{user}}">Physical</a>
                                     </li>
                                     <li>
-                                        <a href="footer2">variant2</a>
+                                        <a href="chemistry?user={{user}}">Chemistry</a>
                                     </li>
                                     <li>
-                                        <a href="footer3">variant3</a>
+                                        <a href="informatics?user={{user}}">Informatics</a>
                                     </li>
                                     <li>
-                                        <a href="footer4">variant4</a>
+                                        <a href="literarys?user={{user}}">Literary</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="contact">Contact us</a>
+                                <a href="contact?user={{user}}">Contact us</a>
                             </li>
+
+                            {%if user == "None" or user == None%}
                             <li>
                                 <a href="login" title="SignIn & SignUp">
                                     <span class="fa fa-user nav-icon" aria-hidden="true"></span>
                                 </a>
                             </li>
-
+                            {%else%}
+                            <li class="dropdown">
+                                <a href="#" >
+                                    {{flname}}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/">Log out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {%endif%}
                         </ul>
                         <!-- search-bar -->
                         <div class="search-bar-agileits">
@@ -131,13 +144,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <!-- shopping cart -->
                         <div class="cart-mainf">
                             <div class="chrcart chrcart2 cart cart box_1">
-                                <form action="#" method="post" class="last">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="display" value="1">
-                                    <button class="top_chr_cart" type="submit" name="submit" value="">
-                                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    </button>
-                                </form>
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span></span><span></span>
+                                <a href="checkout?user={{user}}"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <!-- //shopping cart ends here -->
@@ -198,179 +206,71 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="checkout-right">
                         <h4>Your shopping cart contains:
-                            <span>3 Products</span>
+                            <span>{{lens}} products</span>
                         </h4>
                         <table class="timetable_sub table-responsive">
                             <thead>
                                 <tr>
                                     <th>SL No.</th>
                                     <th>Product</th>
-                                    <th>Quantity</th>
                                     <th>Product Name</th>
-
                                     <th>Price</th>
                                     <th>Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {%for x in blove%}
                                 <tr class="rem1">
                                     <td class="invert">1</td>
                                     <td class="invert-image">
-                                        <a href="single_product">
-                                            <img src="static/images/lib8.jpg" alt=" " class="img+responsive">
+                                        <a href="single_product?user={{user}}?book={{x['id']}}">
+                                            <img src="{{x['link']}}" class="img+responsive">
                                         </a>
                                     </td>
-                                    <td class="invert">
-                                        <div class="quantity">
-                                            <div class="quantity-select">
-                                                <div class="entry value-minus">&nbsp;</div>
-                                                <div class="entry value">
-                                                    <span>1</span>
-                                                </div>
-                                                <div class="entry value-plus active">&nbsp;</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="invert">Be Creative</td>
+                                    <td class="invert">{{x['name']}}</td>
 
-                                    <td class="invert">$100.00</td>
+                                    <td class="invert">{{x['gia']}} VND</td>
                                     <td class="invert">
-                                        <div class="rem">
-                                            <div class="close1"> </div>
-                                        </div>
-
+                                        <form action="{{url_for('after_checkout',user=user,book=x['id'])}}" method="POST"><button type="submit" class="btn btn-delete"><i class="fa fa-trash"></i></button></form>
                                     </td>
                                 </tr>
-                                <tr class="rem2">
-                                    <td class="invert">2</td>
-                                    <td class="invert-image">
-                                        <a href="single_product">
-                                            <img src="static/images/lib3.jpg" alt=" " class="img+responsive">
-                                        </a>
-                                    </td>
-                                    <td class="invert">
-                                        <div class="quantity">
-                                            <div class="quantity-select">
-                                                <div class="entry value-minus">&nbsp;</div>
-                                                <div class="entry value">
-                                                    <span>1</span>
-                                                </div>
-                                                <div class="entry value-plus active">&nbsp;</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="invert">Work From Home</td>
-
-                                    <td class="invert">$80.00</td>
-                                    <td class="invert">
-                                        <div class="rem">
-                                            <div class="close2"> </div>
-                                        </div>
-
-                                    </td>
-                                </tr>
-                                <tr class="rem3">
-                                    <td class="invert">3</td>
-                                    <td class="invert-image">
-                                        <a href="single_product">
-                                            <img src="static/images/lib6.jpg" alt=" " class="img+responsive">
-                                        </a>
-                                    </td>
-                                    <td class="invert">
-                                        <div class="quantity">
-                                            <div class="quantity-select">
-                                                <div class="entry value-minus">&nbsp;</div>
-                                                <div class="entry value">
-                                                    <span>1</span>
-                                                </div>
-                                                <div class="entry value-plus active">&nbsp;</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="invert">E-Commerce</td>
-
-                                    <td class="invert">$120.00</td>
-                                    <td class="invert">
-                                        <div class="rem">
-                                            <div class="close3"> </div>
-                                        </div>
-
-                                    </td>
-                                </tr>
-
+                                {%endfor%}
                             </tbody>
                         </table>
                     </div>
-                    <div class="checkout-left">
+                    <div class="checkout-left" id="printhere">
                         <div class="col-md-4 checkout-left-basket">
                             <h4>Continue to basket</h4>
                             <ul>
-                                <li>Be Creative
+                                {%for x in blove%}
+                                <li>{{x['name']}}
                                     <i>-</i>
-                                    <span>$100.00 </span>
+                                    <span>{{x['gia']}} VND</span>
                                 </li>
-                                <li>Work From Home
+                                {%endfor%}
+                                <li></li>
+                                <li><strong>Total</strong>
                                     <i>-</i>
-                                    <span>$80.00 </span>
-                                </li>
-                                <li>E-Commerce
-                                    <i>-</i>
-                                    <span>$120.00 </span>
-                                </li>
-                                <li>Total Service Charges
-                                    <i>-</i>
-                                    <span>$55.00</span>
-                                </li>
-                                <li>Total
-                                    <i>-</i>
-                                    <span>$355.00</span>
+                                    <strong><span>{{total}} VND</span></strong>
                                 </li>
                             </ul>
                         </div>
                         <div class="col-md-8 address_form">
                             <h4>Billing Address</h4>
-                            <form action="payment" method="post" class="creditly-card-form shopf-sear-headinfo_form">
                                 <div class="creditly-wrapper wrapper">
                                     <div class="information-wrapper">
                                         <div class="first-row form-group">
                                             <div class="controls">
                                                 <label class="control-label">Full name: </label>
-                                                <input class="billing-address-name form-control" type="text" name="name" placeholder="Full name">
-                                            </div>
-                                            <div class="card_number_grids">
-                                                <div class="card_number_grid_left">
-                                                    <div class="controls">
-                                                        <label class="control-label">Mobile number:</label>
-                                                        <input class="form-control" type="text" placeholder="Mobile number">
-                                                    </div>
-                                                </div>
-                                                <div class="card_number_grid_right">
-                                                    <div class="controls">
-                                                        <label class="control-label">Landmark: </label>
-                                                        <input class="form-control" type="text" placeholder="Landmark">
-                                                    </div>
-                                                </div>
-                                                <div class="clear"> </div>
+                                                <input class="billing-address-name form-control" type="text" name="name" value="{{flname}}" readonly>
                                             </div>
                                             <div class="controls">
-                                                <label class="control-label">Town/City: </label>
-                                                <input class="form-control" type="text" placeholder="Town/City">
+                                                <label class="control-label">Address: </label>
+                                                <input class="billing-address-name form-control" type="text" name="name" value="Đại học Khoa học Tự nhiên, ĐHQGHN" readonly>
                                             </div>
-                                            <div class="controls">
-                                                <label class="control-label">Address type: </label>
-                                                <select class="form-control option-fieldf">
-                                                    <option>Office</option>
-                                                    <option>Home</option>
-                                                    <option>Commercial</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <button class="submit check_out">place order</button>
+                                        <button class="submit check_out" onclick="PrintElem('printhere')">Bill</button>
                                     </div>
                                 </div>
-                            </form>
-
                         </div>
 
                         <div class="clearfix"> </div>
@@ -393,7 +293,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </h4>
                     <h5>subscribe to our newsletter to stay up-to-date with our projects.</h5>
                     <div class="subscribe-form">
-                        <form action="#" method="post" class="subscribe_form">
+                        <form action="mailto:someone@example.com" method="POST" class="subscribe_form">
                             <div class="email-news">
                                 <input type="email" placeholder="Email" required="">
                             </div>
@@ -419,22 +319,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <!-- //footer-grid1 -->
                     <!-- footer-grid2 -->
                     <div class="col-md-3 col-sm-6 footer-nav text-center">
-                        <h4>navigation</h4>
-                        <ul>
-                            <li>
-                                <a href="/">Home</a>
-                            </li>
-                            <li>
-                                <a href="about">About us</a>
-                            </li>
-                            <li>
-                                <a href="shop">shop</a>
-                            </li>
-                            <li>
-                                <a href="contact">contact us</a>
-                            </li>
-                        </ul>
-                    </div>
+                <h4>navigation</h4>
+                <ul>
+                    <li>
+                        <a href="/?user={{user}}">Home</a>
+                    </li>
+                    <li>
+                        <a href="about?user={{user}}">About us</a>
+                    </li>
+                    <li>
+                        <a href="subjects?user={{user}}">Subjects</a>
+                    </li>
+                    <li>
+                        <a href="contact?user={{user}}">contact us</a>
+                    </li>
+                </ul>
+            </div>
                     <!-- //footer-grid2 -->
                     <!-- footer-grid3 -->
                     <div class="col-md-3 col-sm-6 blog-footer">
@@ -546,50 +446,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         });
     </script>
     <!-- //cart-js -->
-    <!--quantity-->
     <script>
-        $('.value-plus').on('click', function () {
-            var divUpd = $(this).parent().find('.value'),
-                newVal = parseInt(divUpd.text(), 10) + 1;
-            divUpd.text(newVal);
-        });
+        function PrintElem(elem)
+        {
+            var mywindow = window.open('', 'PRINT', 'height=600,width=800');
 
-        $('.value-minus').on('click', function () {
-            var divUpd = $(this).parent().find('.value'),
-                newVal = parseInt(divUpd.text(), 10) - 1;
-            if (newVal >= 1) divUpd.text(newVal);
-        });
+            mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+            mywindow.document.write('</head><body >');
+            mywindow.document.write('<h1>' + document.title  + '</h1>');
+            mywindow.document.write(document.getElementById(elem).innerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            mywindow.print();
+            mywindow.close();
+
+            return true;
+        }
     </script>
-    <!--quantity-->
-    <!-- FadeOut-Script -->
-    <script>
-        $(document).ready(function (c) {
-            $('.close1').on('click', function (c) {
-                $('.rem1').fadeOut('slow', function (c) {
-                    $('.rem1').remove();
-                });
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function (c) {
-            $('.close2').on('click', function (c) {
-                $('.rem2').fadeOut('slow', function (c) {
-                    $('.rem2').remove();
-                });
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function (c) {
-            $('.close3').on('click', function (c) {
-                $('.rem3').fadeOut('slow', function (c) {
-                    $('.rem3').remove();
-                });
-            });
-        });
-    </script>
-    <!--// FadeOut-Script -->
 
     <!-- dropdown nav -->
     <script>

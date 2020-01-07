@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, redirect, request, jsonify
 from pymongo import MongoClient
-from data import find_pro, count, subs_find, filter_book
+from data import find_pro, count, subs_find, filter_book, data_auto, data_search
 
 app = Flask(__name__)
 myclient = MongoClient("mongodb://localhost:27017/")
@@ -13,7 +13,7 @@ def loginmanage():
     col = db["Admin"]
     error = None
     if request.method == 'POST':
-    	print(request.form['username'])
+    	# print(request.form['username'])
     	if len(list(col.find({"name":str(request.form['username']), "pass":str(request.form['pass'])}))) == 0:
         	error = "Invalid user, please try again!"
     	else:
@@ -34,7 +34,7 @@ def index():
     except:
         flname = ""
         user = None
-    if user == "None" or user is None:
+    if user == "None" or user is None or len(res) == 0:
         return render_template('index.html',user="None")
     else:
         return render_template('index.html', user=user,flname=flname)
@@ -46,11 +46,17 @@ def dashboard():
     count1 = count("Reader")
     count2 = count("Book")
     count3 = count("Admin")
+    lb = subs_find("Love")
+    nlb = []
+    for i in lb:
+        if i['id'] not in nlb:
+            nlb.append(i['id'])
+    count4 = len(nlb)
     col = db["Admin"]
     if (admin is None) or (admin =="None") or (len(list(col.find({"name":str(admin)}))) == 0):
       return render_template('loginmanage.html', error="Please Login")
     else:
-      return render_template('dashboard.html', admin = admin, count1= count1, count2=count2,count3=count3)
+      return render_template('dashboard.html', admin = admin, count1= count1, count2=count2,count3=count3, count4 = count4)
 
 @app.route('/math', methods=['GET', 'POST'])
 def math():
@@ -66,7 +72,7 @@ def math():
         except:
             flname = ""
             user = None
-        if user == "None" or user is None:
+        if user == "None" or user is None or len(res) == 0:
             return render_template('math.html', subs = subs, user="None")
         else:
             return render_template('math.html', subs = subs, user=user,flname=flname)
@@ -85,7 +91,7 @@ def physical():
         except:
             flname = ""
             user = None
-        if user == "None" or user is None:
+        if user == "None" or user is None or len(res) == 0:
             return render_template('physical.html', subs = subs, user="None")
         else:
             return render_template('physical.html', subs = subs,user=user,flname=flname)
@@ -104,7 +110,7 @@ def chemistry():
         except:
             flname = ""
             user = None
-        if user == "None" or user is None:
+        if user == "None" or user is None or len(res) == 0:
             return render_template('chemistry.html', subs=subs, user="None")
         else:
             return render_template('chemistry.html',subs = subs,user=user,flname=flname)
@@ -123,7 +129,7 @@ def informatics():
         except:
             flname = ""
             user = None
-        if user == "None" or user is None:
+        if user == "None" or user is None or len(res) == 0:
             return render_template('informatics.html', subs=subs, user="None")
         else:
             return render_template('informatics.html', subs = subs,user=user,flname=flname)
@@ -142,7 +148,7 @@ def literarys():
         except:
             flname = ""
             user = None
-        if user == "None" or user is None:
+        if user == "None" or user is None or len(res) == 0:
             return render_template('literarys.html', subs=subs, user="None")
         else:
             return render_template('literarys.html',subs = subs,user=user,flname=flname)
@@ -203,7 +209,7 @@ def subjects():
         except:
             flname = ""
             user = None
-        if user == "None" or user is None:
+        if user == "None" or user is None or len(res) == 0:
             return render_template('subjects.html', subs=subs, user="None")
         else:
             return render_template('subjects.html',subs=subs,user=user,flname=flname)
@@ -224,9 +230,9 @@ def filter_subjects(user):
             language = request.form['language']
         except:
             language = ""
-        print(mon)
+        # print(mon)
         subs = filter_book(mon,thoihan,language)
-        print(subs)
+        # print(subs)
         col = db["Reader"]
         res = list(col.find({"email": user}))
         try:
@@ -239,11 +245,6 @@ def filter_subjects(user):
         else:
             return render_template('subjects.html',subs=subs,user=user,flname=flname)
 
-@app.route('/shop', methods=['GET', 'POST'])
-def shop():
-  subs = subs_find("Book")
-  return render_template('shop.html',subs = subs)
-
 @app.route('/single_product', methods=['GET', 'POST'])
 def single_product():
   if request.method == 'GET':
@@ -252,7 +253,7 @@ def single_product():
     col = db["Book"]
     book = user.split("?")[1]
     book = book.split("=")[1]
-    subs = list(col.find({'name': {'$regex':str(book)}} ))
+    subs = list(col.find({'id': book}))
     user = user.split("?")[0]
     col2 = db["Reader"]
     res = list(col2.find({"email": user}))
@@ -261,15 +262,41 @@ def single_product():
     except:
         flname = ""
         user = None
-    if user == "None" or user is None:
+    if user == "None" or user is None or len(res) == 0:
         return render_template('single_product.html', subs=subs, user="None")
     else:
         return render_template('single_product.html', subs=subs, user=user, flname=flname)
 
 
-@app.route('/payment', methods=['GET', 'POST'])
-def payment():
-  return render_template('payment.html')
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+  if request.method == 'GET':
+    # book = str(request.args.get('book')).strip()
+    user = str(request.args.get('user')).strip()
+    col = db["Book"]
+    book = user.split("?")[1]
+    book = book.split("=")[1]
+    user = user.split("?")[0]
+    col2 = db["Reader"]
+    res = list(col2.find({"email": user}))
+    try:
+        flname = res[0]['fname'] + " " + res[0]['lname']
+    except:
+        flname = ""
+        user = None
+    if user == "None" or user is None or len(res) == 0:
+        return render_template('login.html', user="None")
+    else:
+        col3 = db["Love"]
+        rbook = list(col3.find({"id":res[0]['id']}))
+        t = True
+        for i in rbook:
+            if book == i['idbook']:
+                t = False
+        if t == True:
+            col3.insert({"id":res[0]['id'], "idbook":book})
+        subs = list(col.find({"id":book}))
+        return render_template('add.html', user=user, flname=flname, subs=subs)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -283,15 +310,16 @@ def login():
               error = "Invalid user, please try again!"
           else:
               a = list(col.find({"email": str(request.form['username']), "pass": str(request.form['password'])}))
-              print(a)
+              # print(a)
               return redirect(url_for('index', user=request.form['username']))
       except:
           email = request.form['email']
           fname = request.form['firstname']
           lname = request.form['lastname']
           password = request.form['passwd']
-          col.insert({"email": email, "fname": fname, "lname": lname, "pass": password})
-          print("sucess")
+          ids = str(int(col.count()) + 1)
+          col.insert({"id":ids, "email": email, "fname": fname, "lname": lname, "pass": password})
+          # print("sucess")
           error = "Register successful, Please login!"
   return render_template('login.html',error =error,user = user)
 
@@ -299,7 +327,7 @@ def login():
 def about():
     if request.method == 'GET':
         user = request.args.get('user')
-        print(user)
+        # print(user)
         col = db["Reader"]
         res = list(col.find({"email": user}))
         try:
@@ -316,34 +344,8 @@ def about():
 def search(user):
     if request.method == 'POST':
         query = request.form['Search'].strip()
-        print(query)
-        query1 = query.lower()
-        col = db['Book']
-        subs = list(col.find({'name': {'$regex': query1}}))
-        subs2 = list(col.find({'tacgia': {'$regex': query1}}))
-        print(subs)
-        query2 = query1.capitalize()
-        subs1 = list(col.find({'name': {'$regex': query2}}))
-        subs3 = list(col.find({'tacgia': {'$regex': query2}}))
-        print(query2)
-        subs4 = list(col.find({'name': {'$regex': query}}))
-        subs5 = list(col.find({'tacgia': {'$regex': query}}))
-        for i in subs1:
-            if i not in subs:
-                subs.append(i)
-        for i in subs2:
-            if i not in subs:
-                subs.append(i)
-        for i in subs3:
-            if i not in subs:
-                subs.append(i)
-        for i in subs4:
-            if i not in subs:
-                subs.append(i)
-        for i in subs5:
-            if i not in subs:
-                subs.append(i)
-        print(subs)
+        # print(query)
+        subs = data_search(query)
         col=db["Reader"]
         res = list(col.find({"email": user}))
         try:
@@ -351,7 +353,7 @@ def search(user):
         except:
             flname = ""
             user = None
-        if user == "None" or user is None:
+        if user == "None" or user is None or len(res) == 0:
             return render_template('search.html', user="None",subs=subs, query=query)
         else:
             return render_template('search.html',user=user, flname=flname, subs=subs, query=query)
@@ -360,7 +362,7 @@ def search(user):
 def checkout():
     if request.method == 'GET':
         user = request.args.get('user')
-        print(user)
+        # print(user)
         col = db["Reader"]
         res = list(col.find({"email": user}))
         try:
@@ -368,18 +370,53 @@ def checkout():
         except:
             flname = ""
             user = None
-        if user == "None" or user is None:
-            return render_template('checkout.html', user="None")
+        if user == "None" or user is None or len(res) == 0:
+            return render_template('login.html', user="None")
         else:
-            return render_template('checkout.html',user=user,flname=flname)
+            col1 = db["Love"]
+            col2 = db["Book"]
+            resb = list(col1.find({"id":res[0]['id']}))
+            blove = []
+            for i in resb:
+                blove.append(list(col2.find({"id":i["idbook"]}))[0])
+            total = 0
+            for i in blove:
+                total = total + int(i['gia'].replace(".",""))
+            lens = len(blove)
+            return render_template('checkout.html',user=user, flname=flname, blove=blove, lens=lens, total=total)
+@app.route('/checkout?user=<user>&book=<book>', methods=['GET', 'POST'])
+def after_checkout(user,book):
     if request.method == 'POST':
-        return render_template('checkout.html', user="None")
+        # print(user)
+        col = db["Reader"]
+        res = list(col.find({"email": user}))
+        try:
+            flname = res[0]['fname'] + " " + res[0]['lname']
+        except:
+            flname = ""
+            user = None
+        if user == "None" or user is None or len(res) == 0:
+            return render_template('login.html', user="None")
+        else:
+            col1 = db["Love"]
+            user = res[0]['id']
+            col1.delete_one({'id':user, "idbook":book})
+            col2 = db["Book"]
+            resb = list(col1.find({"id":res[0]['id']}))
+            blove = []
+            for i in resb:
+                blove.append(list(col2.find({"id":i["idbook"]}))[0])
+            total = 0
+            for i in blove:
+                total = total + int(i['gia'].replace(".",""))
+            lens = len(blove)
+            return render_template('checkout.html',user=user,flname=flname, blove=blove, lens=lens, total=total)
 
 @app.route('/law', methods=['GET', 'POST'])
 def law():
     if request.method == 'GET':
         user = request.args.get('user')
-        print(user)
+        # print(user)
         col = db["Reader"]
         res = list(col.find({"email": user}))
         try:
@@ -387,7 +424,7 @@ def law():
         except:
             flname = ""
             user = None
-        if user == "None" or user is None:
+        if user == "None" or user is None or len(res) == 0:
             return render_template('law.html', user="None")
         else:
             return render_template('law.html',user=user,flname=flname)
@@ -396,7 +433,7 @@ def law():
 def contact():
     if request.method == 'GET':
         user = request.args.get('user')
-        print(user)
+        # print(user)
         col = db["Reader"]
         res = list(col.find({"email": user}))
         try:
@@ -404,7 +441,7 @@ def contact():
         except:
             flname = ""
             user = None
-        if user == "None" or user is None:
+        if user == "None" or user is None or len(res) == 0:
             return render_template('contact.html', user="None")
         else:
             return render_template('contact.html',user=user,flname=flname)
@@ -412,7 +449,7 @@ def contact():
 def edit():
     if request.method == 'GET':
         admin = str(request.args.get('admin')).strip()
-        print(admin)
+        # print(admin)
         col = db["Book"]
         ids = admin.split("?")[1]
         ids = ids.split("=")[1]
@@ -439,7 +476,7 @@ def after_edit(admin,id):
     description = request.form['description'].strip()
     thoihan = request.form['thoihan'].strip()
     col = db["Book"]
-    print(admin,id)
+    # print(admin,id)
     col.update_one({"id": id}, {"$set": {"mon": mon, "name": name, "tacgia": tacgia, "gia": gia, "nxb": nxb, "giagiam" : giagiam, "language":language, "link":link, "thoihan":thoihan,"description":description}})
     # print("sucess")
     alert = "Sucess"
@@ -456,7 +493,7 @@ def delete():
         subs = list(col.find({'id': str(ids)} ))
         admin = admin.split("?")[0]
         col = db['Admin']
-        print(subs[0]['id'])
+        # print(subs[0]['id'])
         if subs[0]['mon'] == "Toan":
             subs[0]['mon'] = "Math"
         elif subs[0]['mon'] == "Tin":
@@ -483,39 +520,14 @@ def after_delete(admin,id):
 @app.route('/autocomplete', methods=['GET'])
 def autocomplete():
     datas = request.args.get('q')
-    query1 = datas.lower()
-    col = db['Book']
-    subs = list(col.find({'name': {'$regex': query1}},{'_id':False} ))
-    subs2 = list(col.find({'tacgia': {'$regex': query1}},{'_id':False} ))
-    query2 = query1.capitalize()
-    subs1 = list(col.find({'name': {'$regex': query2}},{'_id':False}  ))
-    subs3 = list(col.find({'tacgia': {'$regex': query2}},{'_id':False} ))
-    for i in subs1:
-        if i not in subs:
-            subs.append(i)
-    for i in subs2:
-        if i not in subs:
-            subs.append(i)
-    for i in subs3:
-        if i not in subs:
-            subs.append(i)
-    autosubs =[]
-    for i in subs:
-        if i['name'].strip() not in autosubs:
-            autosubs.append(i['name'].strip())
-        if i['tacgia'].strip() not in autosubs:
-            print(i['tacgia'])
-            autosubs.append(i['tacgia'].strip())
-        if i['language'] not in autosubs:
-            autosubs.append(i['language'])
-    # print(autosubs)
-    matching1 = [s for s in autosubs if query1 in s]
-    matching2 = [s for s in autosubs if query2 in s]
-    for i in matching1:
-        if i not in matching2:
-            matching2.append(i)
-    # print(matching2)
+    matching2 = data_auto(datas)
     return jsonify(matching_results=matching2)
+
+# @app.route('/deletebl', methods=['GET','POST'])
+# def deletebl():
+#     print(book, ids)
+#     return jsonify(matching_results=[])
+
 
 if __name__ == "__main__":
     app.run(debug=True)

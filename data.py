@@ -3,12 +3,8 @@ from pymongo import MongoClient
 myclients = MongoClient("mongodb://localhost:27017/")
 db= myclients["Website"]
 def find_pro(col, sub):
-	# myclient = MongoClient("mongodb://10.14.0.152:27017/")
-	print("success")
 	cols = db["Book"]
-	print("success")
 	res = list(cols.find({"mon":sub}))
-	print(res, "success")
 	return res
 
 def count(col):
@@ -46,3 +42,60 @@ def filter_book(mon,thoihan,language):
 			else:
 				res = list(col.find({"language":language, "thoihan":thoihan, "mon":mon}))
 	return res
+def data_auto(query):
+    query1 = query.lower()
+    col = db['Book']
+    subs = list(col.find({'name': {'$regex': query1}},{'_id':False} ))
+    subs2 = list(col.find({'tacgia': {'$regex': query1}},{'_id':False} ))
+    query2 = query1.capitalize()
+    subs1 = list(col.find({'name': {'$regex': query2}},{'_id':False}  ))
+    subs3 = list(col.find({'tacgia': {'$regex': query2}},{'_id':False} ))
+    for i in subs1:
+        if i not in subs:
+            subs.append(i)
+    for i in subs2:
+        if i not in subs:
+            subs.append(i)
+    for i in subs3:
+        if i not in subs:
+            subs.append(i)
+    autosubs =[]
+    for i in subs:
+        if i['name'].strip() not in autosubs:
+            autosubs.append(i['name'].strip())
+        if i['tacgia'].strip() not in autosubs:
+            autosubs.append(i['tacgia'].strip())
+        if i['language'] not in autosubs:
+            autosubs.append(i['language'])
+    matching1 = [s for s in autosubs if query1 in s]
+    matching2 = [s for s in autosubs if query2 in s]
+    for i in matching1:
+        if i not in matching2:
+            matching2.append(i)
+    return matching2
+def data_search(query):
+    query1 = query.lower()
+    col = db['Book']
+    subs = list(col.find({'name': {'$regex': query1}}))
+    subs2 = list(col.find({'tacgia': {'$regex': query1}}))
+    query2 = query1.capitalize()
+    subs1 = list(col.find({'name': {'$regex': query2}}))
+    subs3 = list(col.find({'tacgia': {'$regex': query2}}))
+    subs4 = list(col.find({'name': {'$regex': query}}))
+    subs5 = list(col.find({'tacgia': {'$regex': query}}))
+    for i in subs1:
+        if i not in subs:
+            subs.append(i)
+    for i in subs2:
+        if i not in subs:
+            subs.append(i)
+    for i in subs3:
+        if i not in subs:
+            subs.append(i)
+    for i in subs4:
+        if i not in subs:
+            subs.append(i)
+    for i in subs5:
+        if i not in subs:
+            subs.append(i)
+    return(subs)

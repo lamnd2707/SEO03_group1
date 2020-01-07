@@ -30,6 +30,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="static/css/style.css" type="text/css" rel="stylesheet" media="all">
     <!-- font-awesome icons -->
     <link href="static/css/font-awesome.css" rel="stylesheet">
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
     <!-- //Custom Theme files -->
     <!-- online-fonts -->
     <!-- logo -->
@@ -322,7 +323,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </h4>
                     <h5>subscribe to our newsletter to stay up-to-date with our projects.</h5>
                     <div class="subscribe-form">
-                        <form action="#" method="post" class="subscribe_form">
+                        <form action="mailto:someone@example.com" method="POST" class="subscribe_form">
                             <div class="email-news">
                                 <input type="email" placeholder="Email" required="">
                             </div>
@@ -529,6 +530,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         });
     </script>
+    <script>
+        $(function() {
+            $("#input-search").autocomplete({
+                source:function(request, response) {
+                    $.getJSON("{{url_for('autocomplete')}}",{
+                        q: request.term, // in flask, "q" will be the argument to look for using request.args
+                    }, function(data) {
+                        response(data.matching_results); // matching_results from jsonify
+                        console.log(data.matching_results);
+                    });
+                },
+                minLength: 2,
+                select: function(event, ui) {
+                    console.log(ui.item.value); // not in your question, but might help later
+                }
+            });
+        })
+  
+    </script>
+ <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
     <script src="static/js/SmoothScroll.min.js"></script>
     <!-- //smooth-scrolling-of-move-up -->
     <!-- Bootstrap core JavaScript

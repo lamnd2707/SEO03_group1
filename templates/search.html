@@ -205,7 +205,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="col-md-3 product-men">
                         <div class="product-chr-info chr">
                             <div class="thumbnail">
-                                <a href="single_product?user={{user}}?book={{x['name']}}">
+                                <a href="single_product?user={{user}}?book={{x['id']}}">
                                     <img src={{x["link"]}} alt="">
                                 </a>
                             </div>
@@ -249,16 +249,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                                     <div class="clearfix"> </div>
                                 </div>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="chr_item" value="Book1">
-                                    <input type="hidden" name="amount" value="180.00">
-                                    <button type="submit" class="chr-cart pchr-cart">Add
+                                <div>
+                                    <a href="add?user={{user}}?book={{x['id']}}"><button class="chr-cart pchr-cart">Add
                                         <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                    </button>
-                                    
-                                </form>
+                                    </button></a>
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -283,7 +278,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </h4>
                     <h5>subscribe to our newsletter to stay up-to-date with our projects.</h5>
                     <div class="subscribe-form">
-                        <form action="#" method="post" class="subscribe_form">
+                        <form action="mailto:someone@example.com" method="POST" class="subscribe_form">
                             <div class="email-news">
                                 <input type="email" placeholder="Email" required="">
                             </div>
