@@ -47,7 +47,7 @@
 			Ubuntu: Open terminal: git clone https://github.com/lamnd2707/SEO03_group1.git
 ## 5. Add database:
 	### 5.1 Example data:
-		- Link: 
+		- Link: https://bom.to/WT6R50
 	### 5.2 Create database in MongoDB:
 	### Use MongoDB Compass
 		1. Create Database: Website
