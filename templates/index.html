@@ -341,7 +341,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="slideshow-container">
                         {%for x in lbres%}
                         <div class="mySlides fade">
-                          <img src="{{x['link']}}" style="width:100%">
+                          <a href="single_product?user={{user}}?book={{x['id']}}"><img src="{{x['link']}}" style="width:400px;height:320px;"></a>
                           <div class="text">{{x['name']}}</div>
                         </div>
                         {%endfor%}
