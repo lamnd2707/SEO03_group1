@@ -107,7 +107,7 @@ def data_love():
     for i in lbres:
         if i['idbook'] not in res:
             res.append(i['idbook'])
-    print(res)
+    # print(res)
     col = db["Book"]
     lb = []
     for i in res:
