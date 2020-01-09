@@ -190,9 +190,9 @@ td.invert-image a img {
 	float: right;
 }
 
-.checkout-left-basket ul li:nth-last-child(n) {
+.total-cart {
 	font-size: 1em;
-	color: #212121;
+	color: #000000;
 	font-weight: 600;
 	padding: 1em 0;
 	border-top: 1px solid #DDD;
