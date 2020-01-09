@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from collections import Counter
 
 myclients = MongoClient("mongodb://localhost:27017/")
 db= myclients["Website"]
@@ -99,3 +100,17 @@ def data_search(query):
         if i not in subs:
             subs.append(i)
     return(subs)
+def data_love():
+    col = db["Love"]
+    lbres = list(col.find())
+    res = []
+    for i in lbres:
+        if i['idbook'] not in res:
+            res.append(i['idbook'])
+    print(res)
+    col = db["Book"]
+    lb = []
+    for i in res:
+        a = list(col.find({"id":i}))
+        lb.append(a[0])
+    return lb

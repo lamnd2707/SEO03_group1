@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, redirect, request, jsonify
 from pymongo import MongoClient
-from data import find_pro, count, subs_find, filter_book, data_auto, data_search
+from data import find_pro, count, subs_find, filter_book, data_auto, data_search, data_love
 
 app = Flask(__name__)
 myclient = MongoClient("mongodb://localhost:27017/")
@@ -29,15 +29,17 @@ def index():
     # print(user)
     col = db["Reader"]
     res = list(col.find({"email":user}))
+    lbres = data_love()
+    print(lbres)
     try:
         flname = res[0]['fname'] + " " + res[0]['lname']
     except:
         flname = ""
         user = None
     if user == "None" or user is None or len(res) == 0:
-        return render_template('index.html',user="None")
+        return render_template('index.html',user="None", lbres=lbres)
     else:
-        return render_template('index.html', user=user,flname=flname)
+        return render_template('index.html', user=user,flname=flname, lbres=lbres)
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
@@ -399,8 +401,8 @@ def after_checkout(user,book):
             return render_template('login.html', user="None")
         else:
             col1 = db["Love"]
-            user = res[0]['id']
-            col1.delete_one({'id':user, "idbook":book})
+            users = res[0]['id']
+            col1.delete_one({'id':users, "idbook":book})
             col2 = db["Book"]
             resb = list(col1.find({"id":res[0]['id']}))
             blove = []
@@ -410,6 +412,7 @@ def after_checkout(user,book):
             for i in blove:
                 total = total + int(i['gia'].replace(".",""))
             lens = len(blove)
+            print(user)
             return render_template('checkout.html',user=user,flname=flname, blove=blove, lens=lens, total=total)
 
 @app.route('/law', methods=['GET', 'POST'])
