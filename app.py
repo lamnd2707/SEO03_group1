@@ -30,7 +30,7 @@ def index():
     col = db["Reader"]
     res = list(col.find({"email":user}))
     lbres = data_love()
-    print(lbres)
+    # print(lbres)
     try:
         flname = res[0]['fname'] + " " + res[0]['lname']
     except:
