@@ -373,7 +373,7 @@ def checkout():
             flname = ""
             user = None
         if user == "None" or user is None or len(res) == 0:
-            return render_template('login.html', user="None")
+            return render_template('login.html', user="None", error = "Please login first!")
         else:
             col1 = db["Love"]
             col2 = db["Book"]
