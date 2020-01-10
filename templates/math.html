@@ -8,7 +8,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="zxx">
 
 <head>
-    <title>LTT | Math </title>
+    <title>LTT | Math</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="LTT Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -26,7 +26,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="static/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
     <!-- shop css -->
     <link href="static/css/shop.css" type="text/css" rel="stylesheet" media="all">
-    <link href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
     <!-- flexslider-css -->
     <link rel="stylesheet" href="static/css/flexslider.css" type="text/css" media="screen" />
     <link href="static/css/style.css" type="text/css" rel="stylesheet" media="all">
@@ -41,8 +41,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- body -->
     <link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
     <!-- //online-fonts -->
-
-
 </head>
 
 
@@ -104,6 +102,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <li>
                                 <a href="contact?user={{user}}">Contact us</a>
                             </li>
+
                             {%if user == "None" or user == None%}
                             <li>
                                 <a href="login" title="SignIn & SignUp">
@@ -122,7 +121,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 </ul>
                             </li>
                             {%endif%}
-
                         </ul>
                         <!-- search-bar -->
                         <div class="search-bar-agileits">
@@ -138,7 +136,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </div>
                             <div id="cd-search" class="cd-search">
                                 <form action="{{url_for('search',user=user)}}" method="POST">
-                                    <input name="Search" type="search" placeholder="Type and Hit Enter...">
+                                    <input id="input-search"name="Search" type="search" placeholder="Type and Hit Enter...">
                                 </form>
                             </div>
                         </div>
@@ -179,7 +177,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="row">
                     <ul class="btn-group btn-breadcrumb bc-list">
                         <li class="btn btn1">
-                            <a href="/?user={{user}}">
+                            <a href="/">
                                 <i class="glyphicon glyphicon-home"></i>
                             </a>
                         </li>
@@ -187,7 +185,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <a href="subjects?user={{user}}">Subjects</a>
                         </li>
                         <li class="btn btn3">
-                            <a href="math?user={{user}}">Maths</a>
+                            <a href="chemistry?user={{user}}">Chemistry</a>
                         </li>
                     </ul>
                 </div>
@@ -204,12 +202,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <div class="product-chr-info chr">
                             <div class="thumbnail">
                                 <a href="single_product?user={{user}}?book={{x['id']}}">
-                                    <img src="{{x['link']}}" alt="">
+                                    <img src={{x["link"]}} alt="">
                                 </a>
                             </div>
                             <div class="caption">
                                 <h4>{{x["name"]}}</h4>
-                                <p >{{x["tacgia"]}}</p>
+                                <p>{{x["tacgia"]}}</p>
                                 <div class="matrlf-mid">
                                     <ul class="price-list">
                                         <li>{{x["giagiam"]}} VND</li>
@@ -267,7 +265,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <!-- footer-grid1 -->
                     <div class="col-md-3 col-sm-6 footer-logo">
                         <h3>
-                            <a href="/?user={{user}}">LTT</a>
+                            <a href="/">LTT</a>
                         </h3>
                         <h4>about us</h4>
                         <p>Computer and Information Science</p>
@@ -289,7 +287,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <li>
                                 <a href="contact?user={{user}}">contact us</a>
                             </li>
-                        </ul>
                     </div>
                     <!-- //footer-grid2 -->
                     <!-- footer-grid3 -->
@@ -465,7 +462,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 containerID: 'toTop', // fading element id
                 containerHoverID: 'toTopHover', // fading element hover id
                 scrollSpeed: 1200,
-                easingType: 'linear' 
+                easingType: 'linear'
                 };
             */
 
@@ -498,7 +495,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         })
   
     </script>
-<script src="//code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+ <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 </body>
 
 </html>
