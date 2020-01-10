@@ -70,6 +70,6 @@
 		Go to: http://IPv4Address/
 		Manage: http://Ipv4Address/loginmanage
 ## 7. How to use:
-	### Link: 
+	### Link: https://bom.to/gFSJrm
 
 
